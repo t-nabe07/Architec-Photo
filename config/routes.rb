@@ -6,10 +6,34 @@ Rails.application.routes.draw do
     sessions: 'public/sessions'
   }
 
+  scope module: :public do
+    root 'homes#top'
+    get 'customers/mypage' => 'customers#show', as: 'mypage'
+    get 'customers/unsubscribe' => 'customers#unsubscribe', as: 'unsubscribe'
+    patch 'customers/withdraw' => 'customers#withdraw', as: 'withdrawr'
+    put 'customers/withdraw' => 'customers#withdraw'
+
+    resources :customers, only: [:show, :edit, :update] do
+      get :favorites, on: :collection
+    end
+    resources :productions do
+      resources :comments, only: [:create, :destroy]
+      resource :goods, only: [:create, :destroy]
+      resource :favorites, only: [:create, :destroy]
+      resource :relationships, only: [:create, :destroy]
+        get 'followings' => 'relationships#followings', as: 'followings'
+        get 'followers' => 'relationships#followers', as: 'followers'
+    end
+  end
+
   # 管理者用
   # URL /admin/sign_in ...
   devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
     sessions: "admin/sessions"
   }
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
+  namespace :admin do
+    resources :customers, only: [:index, :show, :edit, :update]
+  end
+
 end
