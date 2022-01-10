@@ -7,6 +7,6 @@ class AddColumnsToCustomers < ActiveRecord::Migration[5.2]
     add_column :customers, :introduction, :text
     add_column :customers, :college_name, :string
     add_column :customers, :specialty_study, :string
-    add_column :customers, :is_deleted, :boolean
+    add_column :customers, :is_deleted, :boolean, default: false, null: false
   end
 end

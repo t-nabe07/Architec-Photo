@@ -4,21 +4,43 @@
   <%= render "public/shared/error_messages", resource: resource %>
 
   <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <%= f.label :"名前" %>
+    <%= f.text_field :last_name, autofocus: true, class: "form-control", placeholder: "姓" %>
+    <%= f.text_field :first_name, autofocus: true, class: "form-control", placeholder: "名" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :"フリガナ" %>
+    <%= f.text_field :last_name_kana, autofocus: true, class: "form-control", placeholder: "セイ" %>
+    <%= f.text_field :first_name_kana, autofocus: true, class: "form-control mr-2", placeholder: "メイ" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :"大学名" %>
+    <%= f.text_field :college_name, autofocus: true, class: "form-control", placeholder: "正式名称で入力してください" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :"専攻科目" %>
+    <%= f.text_field :specialty_study, autofocus: true, class: "form-control", placeholder: "正式名称で入力してください" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :email %>
+    <%= f.email_field :email, autofocus: true, class:"form-control", placeholder: "メールアドレス" %>
   </div>
 
   <div class="field">
     <%= f.label :password %>
     <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
+    <em>(<%= @minimum_password_length %> 文字以上)</em>
+    <% end %>
+    <%= f.password_field :password, autocomplete: "new-password", class:"form-control", placeholder: "パスワード(6文字以上)" %>
   </div>
 
   <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+    <%= f.label :password_confirmation %>
+    <%= f.password_field :password_confirmation, autocomplete: "new-password", class:"form-control", placeholder: "パスワード(確認用)" %>
   </div>
 
   <div class="actions">

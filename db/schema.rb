@@ -47,7 +47,7 @@ ActiveRecord::Schema.define(version: 2022_01_10_054426) do
     t.text "introduction"
     t.string "college_name"
     t.string "specialty_study"
-    t.boolean "is_deleted"
+    t.boolean "is_deleted", default: false, null: false
     t.index ["email"], name: "index_customers_on_email", unique: true
     t.index ["reset_password_token"], name: "index_customers_on_reset_password_token", unique: true
   end
