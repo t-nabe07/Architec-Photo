@@ -18,6 +18,7 @@
  @import 'font-awesome-sprockets';
  @import 'font-awesome';
 
+
 /*header,footer*/
 
  .navbar-toggler {
@@ -36,3 +37,12 @@
   list-style: none;
  }
 
+
+/*トップページ*/
+
+ .jumbotron {
+  background-image: image-url("topback.jpg");
+  background-position: center center;
+  background-size: cover;
+  height: 700px;
+ }
