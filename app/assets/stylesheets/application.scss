@@ -15,3 +15,24 @@
  */
 
  @import "bootstrap";
+ @import 'font-awesome-sprockets';
+ @import 'font-awesome';
+
+/*header,footer*/
+
+ .navbar-toggler {
+  background-color: #f0f8ff;
+ }
+
+ .navbar-toggler-icon {
+  background-color: #000000;
+ }
+
+ .login-message {
+  color: #ffffff;
+ }
+
+ li {
+  list-style: none;
+ }
+
