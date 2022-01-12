@@ -5,11 +5,12 @@ class Public::ProductionsController < ApplicationController
   end
 
   def create
-    production = Production.new(production_params)
-    production.save
-    redirect_to production_path(production.id)
+    @production = Production.new(production_params)
+    @production.customer_id = current_customer.id
+    @production.save
+    redirect_to production_path(@production.id)
   end
-
+  
   def index
     @production = Production.all
   end
@@ -23,14 +24,20 @@ class Public::ProductionsController < ApplicationController
   end
 
   def update
-    production = Production.find(params[:id])
-    production.update(production_params)
-    redirect_to production_path(production.id)
+    @production = Production.find(params[:id])
+    @production.update(production_params)
+    redirect_to production_path(@production.id)
+  end
+
+  def destroy
+    @production = Production.find(params[:id])
+    @production.destroy
+    redirect_to productions_path
   end
 
   private
   def production_params
-    params.require(:production).permit(:title, :introduction)
+    params.require(:production).permit(:title, :introduction, :top_image_id, :image_id)
   end
 
 end

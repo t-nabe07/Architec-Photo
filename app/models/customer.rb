@@ -9,5 +9,7 @@ class Customer < ApplicationRecord
   validates :last_name_kana,presence:true
   validates :first_name_kana,presence:true
   validates :college_name,presence:true
+  
+  has_many :productions,dependent: :destroy
 
 end
