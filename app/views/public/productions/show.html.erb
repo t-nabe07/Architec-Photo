@@ -3,3 +3,4 @@ production詳細ページです
 <div><%= @production.title %></div>
 <div>Introduction</div>
 <div><%= @production.introduction %></div>
+<%= link_to "edit", edit_production_path(@production.id) %>

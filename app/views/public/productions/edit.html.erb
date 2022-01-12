@@ -1,0 +1,8 @@
+productions編集ページです。
+<%= form_with model:@production,url:"/productions/#{@production.id}",local:true do |f| %>
+  <div>Title</div>
+  <%= f.text_field :title %>
+  <div>Introduction</div>
+  <%= f.text_area :introduction %>
+  <%= f.submit 'save' %>
+<% end %>

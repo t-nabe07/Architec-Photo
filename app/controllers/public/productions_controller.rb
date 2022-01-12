@@ -7,7 +7,7 @@ class Public::ProductionsController < ApplicationController
   def create
     production = Production.new(production_params)
     production.save
-    redirect_to '/productions'
+    redirect_to production_path(production.id)
   end
 
   def index
@@ -16,6 +16,16 @@ class Public::ProductionsController < ApplicationController
 
   def show
     @production = Production.find(params[:id])
+  end
+
+  def edit
+    @production = Production.find(params[:id])
+  end
+
+  def update
+    production = Production.find(params[:id])
+    production.update(production_params)
+    redirect_to production_path(production.id)
   end
 
   private
