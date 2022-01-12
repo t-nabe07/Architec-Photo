@@ -5,7 +5,7 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <% if customer_signed_in? %>
-        <li class="login-message">こんにちは,<%= current_customer.last_name %>さん</li>
+        <li class="login-message">こんにちは,<%= current_customer.full_name %>さん</li>
       <% else %>
         <li class="login-message">こんにちは,ゲストさん</li>
       <% end %>
