@@ -8,7 +8,6 @@ Rails.application.routes.draw do
 
   scope module: :public do
     root 'homes#top'
-    get 'customers/mypage' => 'customers#show', as: 'mypage'
     get 'customers/unsubscribe' => 'customers#unsubscribe', as: 'unsubscribe'
     patch 'customers/withdraw' => 'customers#withdraw', as: 'withdrawr'
     put 'customers/withdraw' => 'customers#withdraw'

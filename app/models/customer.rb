@@ -9,7 +9,16 @@ class Customer < ApplicationRecord
   validates :last_name_kana,presence:true
   validates :first_name_kana,presence:true
   validates :college_name,presence:true
-  
+
   has_many :productions,dependent: :destroy
+
+  #フルネーム(nilの場合を除く）)
+  def full_name
+    self.last_name + " " + self.first_name
+  end
+
+  def full_name_kana
+    self.last_name_kana + " " + self.first_name_kana
+  end
 
 end

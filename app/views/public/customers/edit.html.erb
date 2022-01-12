@@ -1,0 +1,30 @@
+<h3>edit my page</h3>
+<%= form_with model:@customer, local:true do |f| %>
+  <table>
+    <tr>
+      <td>名前</td>
+      <td><%= f.text_field :last_name, autofocus: true, placeholder:"姓" %></td>
+      <td><%= f.text_field :first_name, autofocus: true ,placeholder:"名" %></td>
+    </tr>
+    <tr>
+      <td>カナ</td>
+      <td><%= f.text_field :last_name_kana, autofocus: true,placeholder:"カナ(姓)" %></td>
+      <td><%= f.text_field :first_name_kana, autofocus: true,placeholder:"カナ(名)" %></td>
+    </tr>
+    <tr>
+      <td>自己紹介</td>
+      <td><%= f.text_area :introduction, autofocus: true,placeholder:"自己紹介" %></td>
+    </tr>
+    <tr>
+      <td>大学名称</td>
+      <td><%= f.text_field :college_name, autofocus: true,placeholder:"大学名称(正式名称で入力してください)" %></td>
+    </tr>
+    <tr>
+      <td>専攻</td>
+      <td><%= f.text_field :specialty_study, autofocus: true,placeholder:"専攻(正式名称で入力してください)" %></td>
+    </tr>
+  </table>
+    <tr>
+      <td><%= f.submit "update" %></td>
+    </tr>
+<% end %>
