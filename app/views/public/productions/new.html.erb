@@ -4,5 +4,6 @@ production 新規投稿ページです
   <%= f.text_field :title %>
   <div>Introduction</div>
   <%= f.text_area :introduction %>
+  <%= f.file_field :images, multiple: true %>
   <%= f.submit 'create' %>
 <% end %>

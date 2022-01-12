@@ -10,7 +10,7 @@ class Public::ProductionsController < ApplicationController
     @production.save
     redirect_to production_path(@production.id)
   end
-  
+
   def index
     @production = Production.all
   end
@@ -37,7 +37,7 @@ class Public::ProductionsController < ApplicationController
 
   private
   def production_params
-    params.require(:production).permit(:title, :introduction, :top_image_id, :image_id)
+    params.require(:production).permit(:title, :introduction, :image, :images)
   end
 
 end

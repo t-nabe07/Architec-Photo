@@ -3,6 +3,12 @@ production詳細ページです
 <div><%= @production.title %></div>
 <div>Introduction</div>
 <div><%= @production.introduction %></div>
+<% if @production.images.attached? %>
+  <% @production.images.each do |image| %>
+    <%= image_tag production.images %>
+  <% end %>
+<% end %>
+
 <% if @production.customer == current_customer %>
   <%= link_to "edit", edit_production_path(@production.id) %>
   <%= link_to "delete", production_path(@production), method: :delete %>
