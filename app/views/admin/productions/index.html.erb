@@ -19,7 +19,7 @@
             <td><%= production.customer.college_name %></td>
             <td><%= production.customer.specialty_study %></td>
             <% if production.customer.is_deleted_i18n == "有効" %>
-              <td class="text-success"><%= customer.is_deleted_i18n %></td>
+              <td class="text-success"><%= production.customer.is_deleted_i18n %></td>
             <% else %>
               <td class="text-secondary"><%= production.customer.is_deleted_i18n %></td>
             <% end %>

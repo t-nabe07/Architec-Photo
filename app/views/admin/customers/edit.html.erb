@@ -49,11 +49,11 @@
             </div>
             <div class="form-group">
               <div class="card-text">
-                <%= f.label :ステータス %>
-                <%= f.radio_button :is_deleted, true %>
-                <%= f.label :is_deleted, "退会", value: :true %>
-                <%= f.radio_button :is_deleted, false %>
-                <%= f.label :is_deleted, "会員", value: :false %>
+                <%= f.label :is_deleted, "会員ステータス" %>
+                <%= f.radio_button :is_deleted, :active %>
+                <%= f.label :"有効" %>
+                <%= f.radio_button :is_deleted, :withdraw %>
+                <%= f.label :"退会" %>
               </div>
             </div>
             <div class="actions">

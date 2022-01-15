@@ -1,0 +1,6 @@
+ja:
+  enums:
+      customer:
+        is_deleted:
+          withdraw: "退会"
+          active: "有効"
