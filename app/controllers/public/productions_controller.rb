@@ -8,7 +8,7 @@ class Public::ProductionsController < ApplicationController
     @production = Production.new(production_params)
     @production.customer_id = current_customer.id
     @production.save
-    redirect_to production_path(@production.id)
+    redirect_to production_path(@production.id), notice: '投稿が完了しました'
   end
 
   def index
@@ -25,6 +25,7 @@ class Public::ProductionsController < ApplicationController
 
   def update
     @production = Production.find(params[:id])
+    @production.images.purge
     @production.update(production_params)
     redirect_to production_path(@production.id)
   end
@@ -37,7 +38,7 @@ class Public::ProductionsController < ApplicationController
 
   private
   def production_params
-    params.require(:production).permit(:title, :introduction, :image, :images)
+    params.require(:production).permit(:title, :introduction, images:[])
   end
 
 end

@@ -1,30 +1,58 @@
-<h3>edit my page</h3>
-<%= form_with model:@customer, local:true do |f| %>
-  <table>
-    <tr>
-      <td>名前</td>
-      <td><%= f.text_field :last_name, autofocus: true, placeholder:"姓" %></td>
-      <td><%= f.text_field :first_name, autofocus: true ,placeholder:"名" %></td>
-    </tr>
-    <tr>
-      <td>カナ</td>
-      <td><%= f.text_field :last_name_kana, autofocus: true,placeholder:"カナ(姓)" %></td>
-      <td><%= f.text_field :first_name_kana, autofocus: true,placeholder:"カナ(名)" %></td>
-    </tr>
-    <tr>
-      <td>自己紹介</td>
-      <td><%= f.text_area :introduction, autofocus: true,placeholder:"自己紹介" %></td>
-    </tr>
-    <tr>
-      <td>大学名称</td>
-      <td><%= f.text_field :college_name, autofocus: true,placeholder:"大学名称(正式名称で入力してください)" %></td>
-    </tr>
-    <tr>
-      <td>専攻</td>
-      <td><%= f.text_field :specialty_study, autofocus: true,placeholder:"専攻(正式名称で入力してください)" %></td>
-    </tr>
-  </table>
-    <tr>
-      <td><%= f.submit "update" %></td>
-    </tr>
-<% end %>
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-10 mx-auto">
+      <div class="card">
+        <div class="card-body">
+          <h2 class="subtitle"><%= @customer.full_name %>さんの編集</h2>
+          <%= form_with model:@customer, url: customer_path, local: true do |f| %>
+            <div class="form-group">
+              <div class="card-text my-5">
+                <%= f.label :"変更する場合はユーザー画像を選択してください" %><br>
+                <%= f.file_field :plofile_image %>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="card-text">
+                <%= f.label :"名前", class:"col-sm-2 form-label" %>
+                <%= f.label :"姓", class:"col-sm-1 form-label" %>
+                <%= f.text_field :last_name, autofocus: true, class:"col-sm-3" %>
+                <%= f.label :"名", class:"col-sm-1 form-label" %>
+                <%= f.text_field :first_name, class:"col-sm-3" %>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="card-text">
+                <%= f.label :"カナ", class:"col-sm-2 form-label" %>
+                <%= f.label :"セイ", class:"col-sm-1 form-label" %>
+                <%= f.text_field :last_name_kana, class:"col-sm-3" %>
+                <%= f.label :"メイ", class:"col-sm-1 form-label" %>
+                <%= f.text_field :first_name_kana, class:"col-sm-3" %>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="card-text">
+                <%= f.label :"自己紹介", class:"col-sm-2 form-label" %>
+                <%= f.text_area :introduction, class:"col-sm-8" %>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="card-text">
+                <%= f.label :"大学名称", class:"col-sm-2 form-label" %>
+                <%= f.text_field :college_name, placeholder:"大学名称(正式名称で入力してください)", class:"col-sm-8" %>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="card-text">
+                <%= f.label :"専攻", class:"col-sm-2 form-label" %>
+                <%= f.text_field :specialty_study,placeholder:"専攻(正式名称で入力してください)", class:"col-sm-8" %>
+              </div>
+            </div>
+            <div class="col-1 mx-auto">
+              <%= f.submit '編集内容を保存', class: "btn btn-success" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

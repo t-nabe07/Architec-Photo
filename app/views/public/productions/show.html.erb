@@ -1,15 +1,46 @@
-production詳細ページです
-<div>Title</div>
-<div><%= @production.title %></div>
-<div>Introduction</div>
-<div><%= @production.introduction %></div>
-<% if @production.images.attached? %>
-  <% @production.images.each do |image| %>
-    <%= image_tag production.images %>
-  <% end %>
-<% end %>
-
-<% if @production.customer == current_customer %>
-  <%= link_to "edit", edit_production_path(@production.id) %>
-  <%= link_to "delete", production_path(@production), method: :delete %>
-<% end %>
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-10 mx-auto">
+      <div class="card">
+        <div class="card-body">
+          <h2 class="subtitle my-3">products　投稿詳細</h2>
+          <p><%= flash[:notice] %></p>
+          <div class="form-group">
+            <div class="card-text my-3">
+              <div class="col-md-10">
+                <label>作品タイトル:</label>
+                <label><h5><%= @production.title %></5></label>
+              </div>
+            </div>
+            <div class="col-md-10">
+              <label>作品説明</label>
+              <label><h5><%= @production.introduction %></5></label>
+            </div>
+            <div class="col-md-10">
+              <label>作品画像</label>
+            </div>
+            <div class="col-md-12">
+              <% @production.images.each do |image| %>
+                <% if image.representable? %>
+                  <%= image_tag rails_representation_path image.variant( resize: '300x300') %>
+                  <%#= image_tag image.representation(resize_to_limit: [300,300]) %>
+                <% else %>
+                  <%= link_to rails_blob_path(image, disposition: "attachment") do %>
+                    <%= image_tag "no_image.jpg", alt: "Download file" %>
+                  <% end %>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+          <% if @production.customer == current_customer %>
+            <div class="col-3"><%= link_to "edit", edit_production_path(@production.id), class: "btn btn-success" %></div>
+            <div class="col-3"><%= link_to "delete", production_path(@production), method: :delete, class: "btn btn-danger" %></div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<br>
+<br>

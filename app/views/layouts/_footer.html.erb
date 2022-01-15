@@ -6,6 +6,8 @@
       </button>
       <% if customer_signed_in? %>
         <li class="login-message">こんにちは,<%= current_customer.full_name %>さん</li>
+      <% elsif admin_signed_in? %>
+        <li class="login-message">こんにちは,管理者さん</li>
       <% else %>
         <li class="login-message">こんにちは,ゲストさん</li>
       <% end %>
@@ -17,11 +19,17 @@
           <li class="nav-item"><%= link_to "create", new_production_path, class: 'nav-link text-white' %></li>
           <li class="nav-item"><%= link_to "mypage", customer_path(current_customer.id), class: 'nav-link text-white' %></li>
           <li class="nav-item"><%= link_to "products", productions_path, class: 'nav-link text-white' %></li>
+          <li class="nav-item"><%= link_to "admin", new_admin_session_path, class: 'nav-link text-white' %></li>
+        <% elsif admin_signed_in? %>
+          <li class="nav-item"><%= link_to "logout", destroy_admin_session_path, method: :delete, class: 'nav-link text-white' %></li>
+          <li class="nav-item"><%= link_to "customers", admin_customers_path, class: 'nav-link text-white' %></li>
+          <li class="nav-item"><%= link_to "products", admin_productions_path, class: 'nav-link text-white' %></li>
         <% else %>
           <li class="nav-item"><%= link_to "top", root_path, class: 'nav-link text-white' %></li>
           <li class="nav-item"><%= link_to "login", new_customer_session_path, class: 'nav-link text-white' %></li>
           <li class="nav-item"><%= link_to "new", new_customer_registration_path, class: 'nav-link text-white' %></li>
           <li class="nav-item"><%= link_to "products", productions_path, class: 'nav-link text-white' %></li>
+          <li class="nav-item"><%= link_to "admin", new_admin_session_path, class: 'nav-link text-white' %>
         <% end %>
       </div>
     </div>

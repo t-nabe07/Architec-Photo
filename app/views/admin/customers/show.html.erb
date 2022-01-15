@@ -1,0 +1,47 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12 col-sm-12 col-md-12">
+      <h3 class="bg-light my-3 px-4"><%= @customer.full_name %>さんの詳細</h3>
+      <table class="table row mx-1">
+        <tbody>
+          <tr>
+            <td>customer_id</td>
+            <td><%= @customer.id %></td>
+          </tr>
+          <tr>
+            <td>name</td>
+            <td><%= @customer.full_name %></td>
+          </tr>
+          <tr>
+            <td>kana</td>
+            <td><%= @customer.full_name_kana %></td>
+          </tr>
+          <tr>
+            <td>college_name</td>
+            <td><%= @customer.college_name %></td>
+          </tr>
+          <tr>
+            <td>specialty_study</td>
+            <td><%= @customer.specialty_study %></td>
+          </tr>
+          <tr>
+            <td>email</td>
+            <td><%= @customer.email %></td>
+          </tr>
+          <tr>
+            <td>status</td>
+            <% if @customer.is_deleted_i18n == "有効" %>
+             <td class="text-success px-5"><%= @customer.is_deleted_i18n %></td>
+           <% else %>
+             <td class="text-secondary px-5"><%= @customer.is_deleted_i18n %></td>
+           <% end %>
+          </tr>
+          <tr>
+            <td><%= link_to "edit", edit_admin_customer_path %></td>
+            <td><%= link_to "productions", admin_production_path(@customer.id) %></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

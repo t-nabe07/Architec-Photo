@@ -1,5 +1,15 @@
 <!--　ユーザー情報 -->
 <h3>my page</h3>
+<%# @customer.plofile_image.each do |image| %>
+  <% if @customer.plofile_image.representable? %>
+    <%= image_tag @customer.plofile_image.variant( resize: '300x300') %>
+    <%#= image_tag image.representation(resize_to_limit: [300,300]) %>
+  <% else %>
+    <%= link_to rails_blob_path(plofile_image, disposition: "attachment") do %>
+      <%= image_tag "no_image.jpg", alt: "Download file" %>
+    <% end %>
+  <% end %>
+<%# end %>
 <div>名前：<%= @customer.full_name %></div>
 <div>カナ：<%= @customer.full_name_kana %></div>
 <div>大学名称：<%= @customer.college_name %></div>

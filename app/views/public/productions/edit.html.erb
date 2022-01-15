@@ -1,8 +1,35 @@
-productions編集ページです。
-<%= form_with model:@production,url:"/productions/#{@production.id}",local:true do |f| %>
-  <div>Title</div>
-  <%= f.text_field :title %>
-  <div>Introduction</div>
-  <%= f.text_area :introduction %>
-  <%= f.submit 'save' %>
-<% end %>
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-10 mx-auto">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="subtitle">投稿内容の編集</h2>
+          <%= form_with model:@production,url:"/productions/#{@production.id}",local:true do |f| %>
+            <div class="form-group">
+              <div class="card-text">
+                <%= f.label :"作品タイトル" %>
+                <%= f.text_field :title, class: "form-control" %>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="card-text">
+                <%= f.label :"作品説明" %>
+                <%= f.text_area :introduction,class: "form-control" %>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="card-text my-4">
+                <%= f.label :"画像を選択してください" %><br>
+                <%= f.file_field :images, multiple: true %>
+              </div>
+            </div>
+            <div class="col-1 mx-auto">
+              <%= f.submit '編集内容を保存' %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

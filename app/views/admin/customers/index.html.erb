@@ -1,0 +1,33 @@
+<div class="container">
+  <div class="row">
+    <h3 class="bg-ligth my-3 px-4">Users list</h3>
+    <table class="table table-hover table-inverse mx-5">
+      <thead class="thead-light">
+        <tr>
+          <th>user_id</th>
+          <th>name</th>
+          <th>college_name</th>
+          <th>specialty_study</th>
+          <th>email</th>
+          <th>status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @customers.each do |customer| %>
+          <tr>
+            <td><%= customer.id %></td>
+            <td><%= link_to customer.full_name, admin_customer_path(customer.id) %></td>
+            <td><%= customer.college_name %></td>
+            <td><%= customer.specialty_study %></td>
+            <td><%= customer.email %></td>
+            <% if customer.is_deleted_i18n == "有効" %>
+              <td class="text-success"><%= customer.is_deleted_i18n %></td>
+            <% else %>
+              <td class="text-secondary"><%= customer.is_deleted_i18n %></td>
+            <% end %>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
