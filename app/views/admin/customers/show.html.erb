@@ -5,31 +5,35 @@
       <table class="table row mx-1">
         <tbody>
           <tr>
-            <td>customer_id</td>
+            <td>ユーザーid</td>
             <td><%= @customer.id %></td>
           </tr>
           <tr>
-            <td>name</td>
+            <td>名前</td>
             <td><%= @customer.full_name %></td>
           </tr>
           <tr>
-            <td>kana</td>
+            <td>カナ</td>
             <td><%= @customer.full_name_kana %></td>
           </tr>
           <tr>
-            <td>college_name</td>
+            <td>自己紹介</td>
+            <td><%= @customer.introduction %></td>
+          </tr>
+          <tr>
+            <td>大学名称</td>
             <td><%= @customer.college_name %></td>
           </tr>
           <tr>
-            <td>specialty_study</td>
+            <td>専攻</td>
             <td><%= @customer.specialty_study %></td>
           </tr>
           <tr>
-            <td>email</td>
+            <td>メール</td>
             <td><%= @customer.email %></td>
           </tr>
           <tr>
-            <td>status</td>
+            <td>ステータス</td>
             <% if @customer.is_deleted_i18n == "有効" %>
              <td class="text-success px-5"><%= @customer.is_deleted_i18n %></td>
            <% else %>

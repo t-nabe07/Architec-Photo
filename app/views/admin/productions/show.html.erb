@@ -14,7 +14,17 @@
         <% @customer.productions.each do |production| %>
           <tr>
             <td><%= production.created_at.strftime("%Y年%m月%d日%H時%M分%S秒 ") %></td>
-            <td></td>
+            <td>
+              <% if !production.images.empty? %>
+                <% if production.images[0].representable? %>
+                  <%= image_tag rails_representation_path production.images[0].variant(resize: '80x80')  %>
+                <% else %>
+                  <%= link_to rails_blob_path(production.images[0], disposition: "attachment") do %>
+                    <%= image_tag "no_pdf.jpg",size:'80x80', alt: "Download file" %>
+                  <% end %>
+                <% end %>
+              <% end %>
+            </td>
             <td><%= production.title%></td>
             <td><%= production.introduction %></td>
           </tr>
@@ -23,3 +33,6 @@
     </table>
   </div>
 </div>
+<br>
+<br>
+<br>
