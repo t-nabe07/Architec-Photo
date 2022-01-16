@@ -1,0 +1,21 @@
+<div class="container">
+  </br>
+  </br>
+  </br>
+  </br>
+  </br>
+  </br>
+  <h3 class="display-6 text-center font-weight-bold mb-4 ">本当に退会しますか？</h3>
+　<p class="text-center lead">退会すると、会員登録情報や</br>
+　これまでの投稿履歴が閲覧できなくなります。</br>
+　ただし、投稿したデータは残りますので、不要な場合は退会前に削除してください。</br>
+  退会する場合は、「退会する」をクリックしてください。</br>
+
+  <div class="row">
+    <div class="col text-center">
+      <%= link_to '退会しない',customer_path(current_customer),class: "btn btn-primary" %>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <%= link_to '退会する',withdraw_path,method: :patch, data: {confilm: "本当に退会しますか？" }, class: "btn btn-danger" %>
+    </div>
+  </div>
+</div>

@@ -17,6 +17,7 @@ class Public::ProductionsController < ApplicationController
 
   def show
     @production = Production.find(params[:id])
+    @comment = Comment.new
   end
 
   def edit

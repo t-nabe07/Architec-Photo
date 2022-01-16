@@ -1,7 +1,7 @@
 class Production < ApplicationRecord
 
   belongs_to :customer
-
+  has_many :comments,dependent: :destroy
   #Active Storage用
   has_many_attached :images
 

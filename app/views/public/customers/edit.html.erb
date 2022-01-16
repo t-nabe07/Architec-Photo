@@ -47,8 +47,9 @@
                 <%= f.text_field :specialty_study,placeholder:"専攻(正式名称で入力してください)", class:"col-sm-8" %>
               </div>
             </div>
-            <div class="col-1 mx-auto">
+            <div class="col-3 mx-auto">
               <%= f.submit '編集内容を保存', class: "btn btn-success" %>
+              <%= link_to '退会する',unsubscribe_path(@customer), class: "btn btn-danger" %>
             </div>
           <% end %>
         </div>

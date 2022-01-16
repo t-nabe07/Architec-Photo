@@ -5,6 +5,7 @@ class Customer < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :productions,dependent: :destroy
+  has_many :comments,dependent: :destroy
   #Active Storage用
   has_one_attached :plofile_image
 

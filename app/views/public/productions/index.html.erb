@@ -23,6 +23,9 @@
               <div class="card-text">
                 <%= production.introduction %>
               </div>
+              <div class="card-text">
+                <%= link_to "#{production.comments.count}コメント",production_path(production.id) %>
+              </div>
             </div>
           </div>
         <% end %>

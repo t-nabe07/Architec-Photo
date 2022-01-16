@@ -31,6 +31,25 @@
                 <% end %>
               <% end %>
             </div>
+            <div class="col-md-12">
+              <p>コメント件数:<%= @production.comments.count %></p>
+              <% @production.comments.each do |comment| %>
+                <p>ユーザー画像</p>
+                <%= comment.customer.full_name %>
+                <%= comment.created_at.strftime('%Y/%m/%d') %><%= comment.comment %>
+                <% if comment.customer == current_customer %>
+                  <div>
+                    <%= link_to "削除", production_comment_path(comment.production,comment),method: :delete, class: "btn btn-danger" %>
+                  </div>
+                <% end %>
+              <% end %>
+            </div>
+            <div class="col-md-12">
+              <%= form_with(model:[@production,@comment],local: true)do |f| %>
+                <%= f.text_area :comment, rows:'5',placeholder:"コメントはこちらに" %>
+                <%= f.submit "送信する" %>
+              <% end %>
+            </div>
           </div>
           <% if @production.customer == current_customer %>
             <div class="col-3"><%= link_to "edit", edit_production_path(@production.id), class: "btn btn-success" %></div>
