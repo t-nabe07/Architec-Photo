@@ -39,9 +39,22 @@
                 <%= comment.created_at.strftime('%Y/%m/%d') %><%= comment.comment %>
                 <% if comment.customer == current_customer %>
                   <div>
-                    <%= link_to "削除", production_comment_path(comment.production,comment),method: :delete, class: "btn btn-danger" %>
+                    <%= link_to "コメント削除", production_comment_path(comment.production,comment),method: :delete, class: "btn btn-danger" %>
                   </div>
                 <% end %>
+              <% end %>
+              <% if @production.gooded_by?(current_customer) %>
+                <p>
+                  <%= link_to production_goods_path(@production),method: :delete do %>
+                    ❤️<%= @production.goods.count %>いいね
+                  <% end %>
+                </p>
+              <% else %>
+                <p>
+                  <%= link_to production_goods_path(@production),method: :post do %>
+                    ♡<%= @production.goods.count %>いいね
+                  <% end %>
+                </p>
               <% end %>
             </div>
             <div class="col-md-12">
@@ -52,8 +65,8 @@
             </div>
           </div>
           <% if @production.customer == current_customer %>
-            <div class="col-3"><%= link_to "edit", edit_production_path(@production.id), class: "btn btn-success" %></div>
-            <div class="col-3"><%= link_to "delete", production_path(@production), method: :delete, class: "btn btn-danger" %></div>
+            <div class="col-3"><%= link_to "投稿編集", edit_production_path(@production.id), class: "btn btn-success" %></div>
+            <div class="col-3"><%= link_to "投稿削除", production_path(@production), method: :delete, class: "btn btn-danger" %></div>
           <% end %>
         </div>
       </div>

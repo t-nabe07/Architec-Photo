@@ -2,6 +2,7 @@ class Production < ApplicationRecord
 
   belongs_to :customer
   has_many :comments,dependent: :destroy
+  has_many :goods,dependent: :destroy
   #Active Storage用
   has_many_attached :images
 
@@ -12,6 +13,10 @@ class Production < ApplicationRecord
 
   def full_name_kana
     self.last_name_kana + " " + self.first_name_kana
+  end
+
+  def gooded_by?(customer)
+    goods.where(customer_id: customer.id).exists?
   end
 
 end
