@@ -16,8 +16,9 @@ Rails.application.routes.draw do
     resources :customers, only: [:show, :edit, :update] do
       get :favorites, on: :collection
       resource :relationships, only: [:create, :destroy]
-        get 'followings' => 'relationships#followings', as: 'followings'
-        get 'followers' => 'relationships#followers', as: 'followers'
+      get 'followings' => 'relationships#followings', as: 'followings'
+      get 'followers' => 'relationships#followers', as: 'followers'
+      get :favorites, on: :collection
     end
 
     resources :productions do

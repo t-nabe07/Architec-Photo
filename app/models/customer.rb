@@ -7,6 +7,7 @@ class Customer < ApplicationRecord
   has_many :productions,dependent: :destroy
   has_many :comments,dependent: :destroy
   has_many :goods,dependent: :destroy
+  has_many :favorites,dependent: :destroy
   #Active Storage用
   has_one_attached :plofile_image
   #follow用

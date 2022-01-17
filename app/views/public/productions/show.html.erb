@@ -74,13 +74,16 @@
                 </p>
               <% end %>
             </div>
+            <div class='star-btn' id="favorite_<%= @production.id %>">
+              <%= render "public/favorites/favo", production: @production %>
+            </div>
             <div class="col-md-12">
               <%= form_with(model:[@production,@comment],local: true)do |f| %>
                 <%= f.text_area :comment, rows:'5',placeholder:"コメントはこちらに" %>
                 <%= f.submit "送信する" %>
               <% end %>
             </div>
-            <%#= render "public/customers/follow" %>
+            <div><%= render "public/customers/follow", customer: @production.customer %></div>
           </div>
           <% if @production.customer == current_customer %>
             <div class="col-3"><%= link_to "投稿編集", edit_production_path(@production.id), class: "btn btn-success" %></div>

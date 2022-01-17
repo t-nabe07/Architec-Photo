@@ -3,6 +3,8 @@ class Public::CustomersController < ApplicationController
   def show
     @customer = Customer.find(params[:id])
     @productions = @customer.productions.page(params[:page]).reverse_order
+    favorites = Favorite.where(customer_id: current_customer.id).pluck(:production_id)
+    @favorite_list = Production.find(favorites)
   end
 
   def edit

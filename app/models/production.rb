@@ -1,8 +1,9 @@
 class Production < ApplicationRecord
 
-  belongs_to :customer
+  belongs_to :customer, optional: true
   has_many :comments,dependent: :destroy
   has_many :goods,dependent: :destroy
+  has_many :favorites,dependent: :destroy
   #Active Storage用
   has_many_attached :images
 

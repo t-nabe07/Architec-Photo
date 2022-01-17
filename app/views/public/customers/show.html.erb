@@ -14,7 +14,7 @@
 <div>自己紹介：<%= @customer.introduction %></div>
 <div>大学名称：<%= @customer.college_name %></div>
 <div>専攻：<%= @customer.specialty_study %></div>
-<div><%= render "follow" %></div>
+<div><%= render "follow", customer: @customer %></div>
 <div>フォロー<%= link_to @customer.followings.count, customer_followings_path(@customer) %></div>
 <div>フォロワー<%= link_to @customer.followers.count, customer_followers_path(@customer) %></div>
 <% if @customer.id == current_customer.id %>
@@ -22,10 +22,24 @@
 <% end %>
 <!-- 投稿情報 -->
 <h3>productions</h3>
-<% @productions.each do |production| %>
-  <div>Title:<%= link_to production.title, production_path(production.id) %></div>
-  <div>Introduction:<%= production.introduction %></div>
-<% end %>
+<div>
+  <% @productions.each do |production| %>
+    <div>Title:<%= link_to production.title, production_path(production.id) %></div>
+    <div>Introduction:<%= production.introduction %></div>
+  <% end %>
+</div>
+<!-- お気に入り -->
+<h3>お気に入り</h3>
+<div>
+  <% if @favorite_list.present? %>
+    <% @favorite_list.each do |favorite| %>
+      <p>タイトル：<%= favorite.title %></p>
+      <p>説明：<%= favorite.introduction %></p>
+    <% end %>
+  <% else %>
+    <p>お気に入りはありません</p>
+  <% end %>
+</div>
 <br>
 <br>
 <br>
