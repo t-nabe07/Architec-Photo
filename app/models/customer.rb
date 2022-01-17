@@ -9,6 +9,11 @@ class Customer < ApplicationRecord
   has_many :goods,dependent: :destroy
   #Active Storage用
   has_one_attached :plofile_image
+  #follow用
+  has_many :reverse_of_relationships, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
+  has_many :relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
+  has_many :followers, through: :reverse_of_relationships, source: :follower
+  has_many :followings, through: :relationships, source: :followed
 
   validates :last_name,presence:true
   validates :first_name,presence:true
@@ -27,5 +32,18 @@ class Customer < ApplicationRecord
 
   #enum
   enum is_deleted: {withdraw: true, active: false}
+
+  #follow
+  def follow(customer_id)
+    relationships.create(followed_id: customer_id)
+  end
+
+  def unfollow(customer_id)
+    relationships.find_by(followed_id: customer_id).destroy
+  end
+
+  def following?(customer)
+    followings.include?(customer)
+  end
 
 end

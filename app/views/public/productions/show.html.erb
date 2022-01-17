@@ -8,6 +8,23 @@
           <div class="form-group">
             <div class="card-text my-3">
               <div class="col-md-10">
+                <label>ユーザー画像</label>
+                <label>
+                  <% if @production.customer.plofile_image.representable? %>
+                    <%= image_tag @production.customer.plofile_image.variant( resize: '100x100') %>
+                    <%#= image_tag image.representation(resize_to_limit: [300,300]) %>
+                  <% else %>
+                    <%= link_to rails_blob_path(plofile_image, disposition: "attachment") do %>
+                      <%= image_tag "no_image.jpg", alt: "Download file" %>
+                    <% end %>
+                  <% end %>
+                </label>
+              </div>
+              <div class="col-md-10">
+　　　　　　　　<label>名前：</label>
+　　　　　　　　<label><%= link_to @production.customer.full_name,customer_path(@production.customer.id) %></label>
+              </div>
+              <div class="col-md-10">
                 <label>作品タイトル:</label>
                 <label><h5><%= @production.title %></5></label>
               </div>
@@ -63,6 +80,7 @@
                 <%= f.submit "送信する" %>
               <% end %>
             </div>
+            <%#= render "public/customers/follow" %>
           </div>
           <% if @production.customer == current_customer %>
             <div class="col-3"><%= link_to "投稿編集", edit_production_path(@production.id), class: "btn btn-success" %></div>

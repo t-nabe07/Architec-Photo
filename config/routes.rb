@@ -15,14 +15,15 @@ Rails.application.routes.draw do
 
     resources :customers, only: [:show, :edit, :update] do
       get :favorites, on: :collection
+      resource :relationships, only: [:create, :destroy]
+        get 'followings' => 'relationships#followings', as: 'followings'
+        get 'followers' => 'relationships#followers', as: 'followers'
     end
+
     resources :productions do
       resources :comments, only: [:create, :destroy]
       resource :goods, only: [:create, :destroy]
       resource :favorites, only: [:create, :destroy]
-      resource :relationships, only: [:create, :destroy]
-        get 'followings' => 'relationships#followings', as: 'followings'
-        get 'followers' => 'relationships#followers', as: 'followers'
     end
   end
 

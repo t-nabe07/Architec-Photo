@@ -1,5 +1,4 @@
-<!--　ユーザー情報 -->
-<h3>my page</h3>
+<h3><%= @customer.full_name %>さんの詳細</h3>
 <%# @customer.plofile_image.each do |image| %>
   <% if @customer.plofile_image.representable? %>
     <%= image_tag @customer.plofile_image.variant( resize: '300x300') %>
@@ -12,15 +11,21 @@
 <%# end %>
 <div>名前：<%= @customer.full_name %></div>
 <div>カナ：<%= @customer.full_name_kana %></div>
+<div>自己紹介：<%= @customer.introduction %></div>
 <div>大学名称：<%= @customer.college_name %></div>
 <div>専攻：<%= @customer.specialty_study %></div>
+<div><%= render "follow" %></div>
+<div>フォロー<%= link_to @customer.followings.count, customer_followings_path(@customer) %></div>
+<div>フォロワー<%= link_to @customer.followers.count, customer_followers_path(@customer) %></div>
 <% if @customer.id == current_customer.id %>
   <div><%= link_to "edit", edit_customer_path(@customer) %></div>
 <% end %>
-
 <!-- 投稿情報 -->
 <h3>productions</h3>
 <% @productions.each do |production| %>
   <div>Title:<%= link_to production.title, production_path(production.id) %></div>
   <div>Introduction:<%= production.introduction %></div>
 <% end %>
+<br>
+<br>
+<br>
