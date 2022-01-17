@@ -1,1 +1,7 @@
 <h2>フォロワー一覧</h2>
+<%# binding.pry %>
+<% if @customers.exists? %>
+  <%= render 'public/customers/index', customers: @customers %>
+<% else %>
+  <p>ユーザーはいません</p>
+<% end %>
