@@ -6,6 +6,7 @@
           <h2 class="subtitle my-3">products　投稿詳細</h2>
           <p><%= flash[:notice] %></p>
           <div class="form-group">
+
             <div class="card-text my-3">
               <div class="col-md-10">
                 <label>ユーザー画像</label>
@@ -29,6 +30,7 @@
                 <label><h5><%= @production.title %></5></label>
               </div>
             </div>
+
             <div class="col-md-10">
               <label>作品説明</label>
               <label><h5><%= @production.introduction %></5></label>
@@ -48,35 +50,30 @@
                 <% end %>
               <% end %>
             </div>
-            <div class="col-md-12">
+            <div class="comments-count col-md-12" id="production_<%= @production.id %>">
               <p>コメント件数:<%= @production.comments.count %></p>
-              <% @production.comments.each do |comment| %>
-                <p>ユーザー画像</p>
-                <%= comment.customer.full_name %>
-                <%= comment.created_at.strftime('%Y/%m/%d') %><%= comment.comment %>
-                <% if comment.customer == current_customer %>
-                  <div>
-                    <%= link_to "コメント削除", production_comment_path(comment.production,comment),method: :delete, class: "btn btn-danger" %>
-                  </div>
-                <% end %>
-              <% end %>
+            </div>
+            <div class="comments" id="production_<%= @production.id %>">
+              <%= render "public/comments/comment", production: @production %>
             </div>
             <div class='good-btn' id="good_<%= @production.id %>"><%= render "public/goods/good", production: @production %></div>
             <div class='star-btn' id="favorite_<%= @production.id %>">
               <%= render "public/favorites/favo", production: @production %>
             </div>
             <div class="col-md-12">
-              <%= form_with(model:[@production,@comment],local: true)do |f| %>
+              <%= form_with(model:[@production,@comment],remote: true)do |f| %>
                 <%= f.text_area :comment, rows:'5',placeholder:"コメントはこちらに" %>
                 <%= f.submit "送信する" %>
               <% end %>
             </div>
             <div class='follow-btn' id="follow"><%= render "public/relationships/follow", customer: @production.customer %></div>
           </div>
+
           <% if @production.customer == current_customer %>
             <div class="col-3"><%= link_to "投稿編集", edit_production_path(@production.id), class: "btn btn-success" %></div>
             <div class="col-3"><%= link_to "投稿削除", production_path(@production), method: :delete, class: "btn btn-danger" %></div>
           <% end %>
+
         </div>
       </div>
     </div>
