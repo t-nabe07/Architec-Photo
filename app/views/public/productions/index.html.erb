@@ -24,21 +24,13 @@
                 <%= production.introduction %>
               </div>
               <div class="card-text">
-                <%= link_to "#{production.comments.count}コメント",production_path(production.id) %>
+                <%= "#{production.comments.count}コメント" %>
               </div>
               <div class="card-text">
                 <% if production.gooded_by?(current_customer) %>
-                  <p>
-                    <%= link_to production_goods_path(production),method: :delete do %>
-                      ❤️<%= production.goods.count %>いいね
-                    <% end %>
-                  </p>
+                  <p>❤️<%= production.goods.count %>いいね</p>
                 <% else %>
-                  <p>
-                    <%= link_to production_goods_path(production),method: :post do %>
-                      ♡<%= production.goods.count %>いいね
-                    <% end %>
-                  </p>
+                  <p>♡<%= production.goods.count %>いいね</p>
                 <% end %>
               </div>
             </div>
