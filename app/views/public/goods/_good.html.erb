@@ -3,17 +3,3 @@
 <% else %>
   <%= link_to production.goods.count, production_goods_path(production), method: :post, remote: true, class: "fas fa-heart heart_blue" %>
 <% end %>
-
-<%# if production.gooded_by?(current_customer) %>
-  <p>
-    <%#= link_to production_goods_path(production),method: :delete, remote: true, class:"good-btn" do %>
-      ️<%#= production.goods.count %>
-    <%# end %>
-  </p>
-<%# else %>
-  <p>
-    <%#= link_to production_goods_path(production),method: :post, remote: true, class:"good-btn" do %>
-      <%#= production.goods.count %>
-    <%# end %>
-  </p>
-<%# end %>

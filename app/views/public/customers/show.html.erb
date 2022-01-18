@@ -14,7 +14,7 @@
 <div>自己紹介：<%= @customer.introduction %></div>
 <div>大学名称：<%= @customer.college_name %></div>
 <div>専攻：<%= @customer.specialty_study %></div>
-<div><%= render "follow", customer: @customer %></div>
+<div><%= render "public/relationships/follow", customer: @customer %></div>
 <div>フォロー<%= link_to @customer.followings.count, customer_followings_path(@customer) %></div>
 <div>フォロワー<%= link_to @customer.followers.count, customer_followers_path(@customer) %></div>
 <% if @customer.id == current_customer.id %>

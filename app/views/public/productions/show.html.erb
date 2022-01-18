@@ -71,7 +71,7 @@
                 <%= f.submit "送信する" %>
               <% end %>
             </div>
-            <div><%= render "public/customers/follow", customer: @production.customer %></div>
+            <div class='follow-btn' id="follow"><%= render "public/relationships/follow", customer: @production.customer %></div>
           </div>
           <% if @production.customer == current_customer %>
             <div class="col-3"><%= link_to "投稿編集", edit_production_path(@production.id), class: "btn btn-success" %></div>
