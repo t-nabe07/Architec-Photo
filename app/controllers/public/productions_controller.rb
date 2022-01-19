@@ -1,4 +1,5 @@
 class Public::ProductionsController < ApplicationController
+ 
 
   def new
     @production = Production.new

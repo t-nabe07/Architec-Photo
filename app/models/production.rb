@@ -1,4 +1,5 @@
 class Production < ApplicationRecord
+  before_commit :authenticate_customer!
 
   belongs_to :customer, optional: true
   has_many :comments,dependent: :destroy
@@ -15,6 +16,7 @@ class Production < ApplicationRecord
   def full_name_kana
     self.last_name_kana + " " + self.first_name_kana
   end
+
 
   def gooded_by?(customer)
     goods.where(customer_id: customer.id).exists?

@@ -1,13 +1,27 @@
 <% if @production.comments.present? %>
   <% @production.comments.each do |comment| %>
-    <p>ユーザー画像</p>
-    <%= comment.customer.full_name %>
-    <%= comment.created_at.strftime('%Y/%m/%d') %><%= comment.comment %>
-    <% if comment.customer == current_customer %>
-      <div>
-        <%= link_to "コメント削除", production_comment_path(comment.production,comment),method: :delete, remote: true, class: "btn btn-danger" %>
-      </div>
-    <% end %>
+    <table>
+      <tr>
+        <td>
+          <% if comment.customer.plofile_image.representable? %>
+            <%= image_tag rails_representation_path comment.customer.plofile_image.variant( resize: '60x60'), class:"plofile_image" %>
+          <% else %>
+            <%= link_to rails_blob_path(image, disposition: "attachment") do %>
+              <%= image_tag "no_image.jpg", alt: "Download file" %>
+            <% end %>
+          <% end %>
+        </td>
+        <td><%= comment.customer.full_name %></td>
+        <td><%= comment.created_at.strftime('%Y/%m/%d') %><%= comment.comment %></td>
+        <td>
+          <% if comment.customer == current_customer %>
+            <div>
+              <%= link_to "コメント削除", production_comment_path(comment.production,comment),method: :delete, remote: true, class: "btn btn-danger" %>
+            </div>
+          <% end %>
+        </td>
+      </tr>
+    </table>
   <% end %>
 <% else %>
   <p>コメントはまだありません</p>

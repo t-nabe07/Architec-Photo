@@ -5,7 +5,6 @@
         <div class="card-body">
           <p><%= flash[:notice] %></p>
           <div class="form-group">
-
             <div class="card-text my-3">
               <div class="row my-5 mx-right">
                 <div class="col-6 d-flex justify-content-end mx-auto">
@@ -42,14 +41,15 @@
 
             <div class="col-md-10">
               <label><div class='good-btn' id="good_<%= @production.id %>"><%= render "public/goods/good", production: @production %></div></label>
-              <label><div class='star-btn' id="favorite_<%= @production.id %>"><%= render "public/favorites/favo", production: @production %></div></label>
+              <% if @production.customer.id != current_customer.id %>
+                <label><div class='star-btn' id="favorite_<%= @production.id %>"><%= render "public/favorites/favo", production: @production %></div></label>
+              <% end %>
               <label><div class="comments-count col-md-12" id="production_<%= @production.id %>"><p>コメント件数:<%= @production.comments.count %></p></div></label>
             </div>
             <div class="col-md-12">
               <% @production.images.each do |image| %>
                 <% if image.representable? %>
-                  <%= image_tag rails_representation_path image.variant( resize: '400x400') %>
-                  <%#= image_tag image.representation(resize_to_limit: [300,300]) %>
+                  <%= image_tag rails_representation_path image.variant( resize: '850x850') %>
                 <% else %>
                   <%= link_to rails_blob_path(image, disposition: "attachment") do %>
                     <%= image_tag "no_image.jpg", alt: "Download file" %>
@@ -57,17 +57,18 @@
                 <% end %>
               <% end %>
             </div>
-            <div class="col-md-10">
+            <div class="col-md-10 my-3">
               <label>作品説明</label>
               <label><h5><%= @production.introduction %></5></label>
             </div>
             <div class="comments" id="production_<%= @production.id %>">
               <%= render "public/comments/comment", production: @production %>
             </div>
-
+            <br>
             <div class="col-md-12">
               <%= form_with(model:[@production,@comment],remote: true)do |f| %>
                 <%= f.text_area :comment, size: '80x5',placeholder:"コメントはこちらに" %>
+                <br>
                 <%= f.submit "送信する" %>
               <% end %>
             </div>

@@ -55,7 +55,7 @@
       <h3 class="favorite-title">お気に入り</h3>
     </div>
     <div class="col-8 d-flex justify-content-center mx-auto">
-      <div class="col-10">
+      <div class="col-10 d-flex justify-content-center mx-auto">
         <% if @favorite_list.present? %>
           <% @favorite_list.each do |favorite| %>
             <button type="button", class="inline-block button">
