@@ -46,6 +46,30 @@
   background-size: cover;
   height: 700px;
  }
+
+/*マイページ*/
+ .plofile_image {
+  border-radius: 50%;
+ }
+
+ .favorite-title {
+
+ }
+
+  /*ボタン*/
+ .button {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  background-color: #000000;
+  text-align: center;
+ }
+
+ .inline-block{
+  display:inline-block;
+ }
+
+
  /*赤いハート*/
  .heart_red{color:#e54747;}
  /*青いハート*/
@@ -54,3 +78,4 @@
  .star-icon1{color:#808080;}
  /*黄色スター*/
  .star-icon2{color:#ffa500;}
+
