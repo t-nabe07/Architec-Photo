@@ -47,15 +47,23 @@
               <label><div class="comments-count col-md-12" id="production_<%= @production.id %>"><p>コメント件数:<%= @production.comments.count %></p></div></label>
             </div>
             <div class="col-md-12">
-              <% @production.images.each do |image| %>
-                <% if image.representable? %>
-                  <%= image_tag rails_representation_path image.variant( resize: '850x850') %>
-                <% else %>
-                  <%= link_to rails_blob_path(image, disposition: "attachment") do %>
-                    <%= image_tag "no_image.jpg", alt: "Download file" %>
+              <div class="swiper mySwiper">
+                <div class="swiper-wrapper">
+                  <% @production.images.each do |image| %>
+                    <div class="swiper-slide">
+                      <% if image.representable? %>
+                        <%= image_tag rails_representation_path image.variant( resize: '850x850') %>
+                      <% else %>
+                        <%= link_to rails_blob_path(image, disposition: "attachment") do %>
+                          <%= image_tag "no_image.jpg", alt: "Download file" %>
+                        <% end %>
+                      <% end %>
+                    </div>
                   <% end %>
-                <% end %>
-              <% end %>
+                </div>
+                <div class="swiper-pagination"></div>
+              </div>
+
             </div>
             <div class="col-md-10 my-3">
               <label>作品説明</label>
@@ -65,11 +73,11 @@
               <%= render "public/comments/comment", production: @production %>
             </div>
             <br>
-            <div class="col-md-12">
+            <div class="form-table col-md-12 xs-12">
               <%= form_with(model:[@production,@comment],remote: true)do |f| %>
-                <%= f.text_area :comment, size: '80x5',placeholder:"コメントはこちらに" %>
+                <td><%= f.text_area :comment, size: '60%x5%',placeholder:"コメントはこちらに" %></td>
                 <br>
-                <%= f.submit "送信する" %>
+                <td><%= f.submit "送信する" %></td>
               <% end %>
             </div>
           </div>

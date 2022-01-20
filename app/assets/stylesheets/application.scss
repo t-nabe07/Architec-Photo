@@ -13,7 +13,7 @@
  *= require_tree .
  *= require_self
  */
-
+ @import 'swiper/swiper-bundle';
  @import "bootstrap";
  @import 'font-awesome-sprockets';
  @import 'font-awesome';
@@ -56,6 +56,10 @@
   height: 50%;
  }
 
+ .index_image {
+  width: 90%;
+ }
+
   /*ボタン*/
  .button {
   padding: 10px;
@@ -77,4 +81,26 @@
  .star-icon1{color:#808080;}
  /*黄色スター*/
  .star-icon2{color:#ffa500;}
+ /*ページネーションバー*/
+ .pagination {
+  justify-content: right;
+  margin-right: 10%;
+ }
 
+ /*swiper*/
+ .swiper {
+
+ }
+
+ .swiper-slide {
+
+ }
+
+ .swiper-slide img {
+  width: 90%;
+ }
+
+ .form-table td {
+  display: block;
+  width: 90%;
+ }

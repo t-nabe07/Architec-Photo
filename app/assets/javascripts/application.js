@@ -14,6 +14,11 @@
 //= require popper
 //= require bootstrap-sprockets
 
+//= require swiper/swiper-bundle.js
+//= require swiper.js
+
+//require("turbolinks").start()
+
 //= require rails-ujs
 //= require activestorage
 //= require turbolinks

@@ -2,7 +2,7 @@ class Public::ProductionsController < ApplicationController
   #indexだけは閲覧OKにしたい. production.rbに引っかかる。
   #before_action :redirect_root, except: :index
   #エラー出ないように仮で設定しておく
-  before_action :authenticate_customer!
+  #before_action :authenticate_customer!
 
   def new
     @production = Production.new
@@ -18,7 +18,10 @@ class Public::ProductionsController < ApplicationController
   def index
     @production = Production.page(params[:page]).reverse_order
     #いいね数の比較メソッド
-    @productions = Production.find(Good.group(:production_id).order('count(production_id) desc').limit(4).pluck(:production_id))
+    @productions = Production.find(Good.group(:production_id)
+                             .order('count(production_id) desc')
+                             .limit(4)
+                             .pluck(:production_id))
   end
 
   def show
