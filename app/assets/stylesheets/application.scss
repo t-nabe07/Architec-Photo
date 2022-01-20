@@ -39,7 +39,6 @@
 
 
 /*トップページ*/
-
  .jumbotron {
   background-image: image-url("topback.jpg");
   background-position: center center;
@@ -50,6 +49,11 @@
 /*マイページ*/
  .plofile_image {
   border-radius: 50%;
+ }
+ .production_image {
+  border-radius: 20px;
+  width: 50%;
+  height: 50%;
  }
 
   /*ボタン*/

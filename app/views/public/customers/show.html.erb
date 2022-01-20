@@ -35,7 +35,7 @@
             <% if !production.images.empty? %>
               <% if production.images[0].representable? %>
                 <%= link_to production_path(production.id) do %>
-                  <%= image_tag rails_representation_path production.images[0].variant(combine_options:{gravity: :center, resize:"250x250^", crop:"250x250+0+0"}).processed, class:"plofile_image" %>
+                  <%= image_tag rails_representation_path production.images[0].variant(combine_options:{gravity: :center, resize:"250x250^", crop:"250x250+0+0"}).processed, class:"production_image" %>
                 <% end %>
               <% else %>
                 <%= link_to rails_blob_path(production.images[0], disposition: "attachment") do %>

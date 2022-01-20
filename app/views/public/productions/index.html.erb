@@ -3,6 +3,43 @@
     <div class="col-lg-2">
     </div>
     <div class="col-lg-12 mx-auto">
+
+      <h4 class="my-3 mx-4">オススメ順（いいねの多い順）</h4>
+      <div class="card-group">
+        <% @productions.each do |production| %>
+          <div class="col-lg-3 col-md-4 col-ms-6 my-2">
+            <% if !production.images.empty? %>
+              <% if production.images[0].representable? %>
+                <%= image_tag rails_representation_path production.images[0].variant(combine_options:{gravity: :center, resize:"200x200^", crop:"200x200+0+0"}).processed %>
+              <% else %>
+                <%= link_to rails_blob_path(production.images[0], disposition: "attachment") do %>
+                  <%= image_tag "no_pdf.jpg",size:'200x200', alt: "Download file" %>
+                <% end %>
+              <% end %>
+            <% end %>
+            <div class="card-body">
+              <div class="card-title">
+                <%= link_to production.title, production_path(production.id) %>
+              </div>
+              <div class="card-text">
+                <%= production.introduction %>
+              </div>
+              <div class="comments-count" id="production_<%= production.id %>">
+                <%= "#{production.comments.count}コメント" %>
+              </div>
+              <div class="card-text">
+                <% if production.gooded_by?(current_customer) %>
+                  <p>❤️<%= production.goods.count %>いいね</p>
+                <% else %>
+                  <p>♡<%= production.goods.count %>いいね</p>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+        <%= paginate @production %>
+      </div>
+
       <h4 class="my-3 mx-4">投稿一覧</h4>
       <div class="card-group">
         <% @production.each do |production| %>
