@@ -1,8 +1,4 @@
 class Public::ProductionsController < ApplicationController
-  #indexだけは閲覧OKにしたい. production.rbに引っかかる。
-  #before_action :redirect_root, except: :index
-  #エラー出ないように仮で設定しておく
-  #before_action :authenticate_customer!
 
   def new
     @production = Production.new
@@ -33,11 +29,23 @@ class Public::ProductionsController < ApplicationController
     @production = Production.find(params[:id])
   end
 
-  def update
+  def update #複数画像の場合選択削除
+    # @production = Production.find(params[:id])
+    # @production.images.purge
+    # @production.update(production_params)
+    # redirect_to production_path(@production.id)
     @production = Production.find(params[:id])
-    @production.images.purge
-    @production.update(production_params)
-    redirect_to production_path(@production.id)
+    if params[:production][:image_ids]
+      params[:production][:image_ids].each do |image_id|
+        image = @production.images.find(image_id)
+        image.purge.later
+      end
+    end
+    if @production.update_attributes(production_params)
+      redirect_to production_path(@production.id), notice: "更新が完了しました"
+    else
+      render :edit
+    end
   end
 
   def destroy

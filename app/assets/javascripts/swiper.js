@@ -5,9 +5,9 @@ $(document).on('turbolinks:load', function () {
         grabCursor: true,
         cubeEffect: {
           shadow: true,
-          slideShadows: true,
+
           shadowOffset: 20,
-          shadowScale: 0.94,
+          shadowScale: 0.44,
         },
         pagination: {
           el: ".swiper-pagination",

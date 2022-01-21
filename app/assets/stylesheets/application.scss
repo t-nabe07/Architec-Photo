@@ -60,6 +60,11 @@
   width: 90%;
  }
 
+ .follow-box {
+  border: #4e7bcc 1px solid; /*境界線の指定*/
+  padding:10px;
+ }
+
   /*ボタン*/
  .button {
   padding: 10px;
@@ -81,6 +86,7 @@
  .star-icon1{color:#808080;}
  /*黄色スター*/
  .star-icon2{color:#ffa500;}
+ 
  /*ページネーションバー*/
  .pagination {
   justify-content: right;
@@ -89,18 +95,23 @@
 
  /*swiper*/
  .swiper {
-
  }
 
  .swiper-slide {
-
  }
 
  .swiper-slide img {
   width: 90%;
+  height: 80%;
  }
 
  .form-table td {
   display: block;
   width: 90%;
  }
+
+ /* swiperページネーション */
+.swiper-pagination {
+ color: fffff0;
+}
+

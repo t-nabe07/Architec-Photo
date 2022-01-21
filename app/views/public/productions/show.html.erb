@@ -1,15 +1,16 @@
 <div class="container mt-5">
   <div class="row">
-    <div class="col-10 mx-auto">
+    <div class="col-sm-12 col-md-12 col-lg-12">
       <div class="card">
         <div class="card-body">
           <p><%= flash[:notice] %></p>
-          <div class="form-group">
+          <div class="container form-contents">
+
             <div class="card-text my-3">
               <div class="row my-5 mx-right">
                 <div class="col-6 d-flex justify-content-end mx-auto">
                   <% if @production.customer.plofile_image.representable? %>
-                    <%= image_tag @production.customer.plofile_image.variant( resize: '200x200'), class:"plofile_image" %>
+                    <%= image_tag @production.customer.plofile_image.variant(combine_options:{gravity: :center, resize:"200x200^", crop:"200x200+0+0"}).processed, class:"plofile_image" %>
                   <% else %>
                     <%= link_to rails_blob_path(plofile_image, disposition: "attachment") do %>
                       <%= image_tag "no_image.jpg", alt: "Download file" %>
@@ -46,6 +47,7 @@
               <% end %>
               <label><div class="comments-count col-md-12" id="production_<%= @production.id %>"><p>コメント件数:<%= @production.comments.count %></p></div></label>
             </div>
+
             <div class="col-md-12">
               <div class="swiper mySwiper">
                 <div class="swiper-wrapper">
@@ -61,23 +63,30 @@
                     </div>
                   <% end %>
                 </div>
-                <div class="swiper-pagination"></div>
               </div>
-
+              <br>
+              <br>
+              <div class="swiper-pagination"></div>
             </div>
+
+
+
             <div class="col-md-10 my-3">
               <label>作品説明</label>
               <label><h5><%= @production.introduction %></5></label>
             </div>
+
             <div class="comments" id="production_<%= @production.id %>">
               <%= render "public/comments/comment", production: @production %>
             </div>
             <br>
-            <div class="form-table col-md-12 xs-12">
+            <div class="form-table col-md-12 mb-6">
               <%= form_with(model:[@production,@comment],remote: true)do |f| %>
-                <td><%= f.text_area :comment, size: '60%x5%',placeholder:"コメントはこちらに" %></td>
-                <br>
-                <td><%= f.submit "送信する" %></td>
+                <div class="col-lg-12 col-md-12 col-sm-12 mb-6">
+                  <td><%= f.text_area :comment, size: '60%x5%',placeholder:"コメントはこちらに" %></td>
+                  <br>
+                  <td><%= f.submit "送信する" %></td>
+                </div>
               <% end %>
             </div>
           </div>

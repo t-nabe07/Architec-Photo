@@ -19,8 +19,16 @@
             </div>
             <div class="form-group">
               <div class="card-text my-4">
-                <%= f.label :"画像を選択してください" %><br>
-                <%= f.file_field :images, multiple: true %>
+                <%= f.label :images, "現在登録されている作品" %>
+                  <% if @production.images.present? %>
+                    <p>※削除したい画像にチェックを入れてください</p>
+                    <% @production.images.each do |image| %>
+                      <%= f.check_box :image_ids, {multiple: true}, image.id, false %>
+                      <%= image_tag image, size:"300x300" %> <br>
+                    <% end %>
+                  <% end %>
+                <%#= f.label :"画像を選択してください" %><br>
+                <%#= f.file_field :images, multiple: true %>
               </div>
             </div>
             <div class="col-1 mx-auto">
@@ -32,4 +40,8 @@
     </div>
   </div>
 </div>
+<br>
+<br>
+<br>
+<br>
 

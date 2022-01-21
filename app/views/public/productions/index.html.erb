@@ -2,18 +2,27 @@
   <div class="row">
     <div class="col-lg-12 mx-auto">
 
-      <h4 class="my-3 mx-4">オススメ順（いいねの多い順）</h4>
+      <h4 class="my-3 mx-4">人気作品</h4>
       <div class="card-group">
         <% @productions.each do |production| %>
           <div class="col-lg-3 col-md-4 col-ms-6 my-2">
             <% if !production.images.empty? %>
-              <% if production.images[0].representable? %>
-                <%= image_tag rails_representation_path production.images[0].variant(combine_options:{gravity: :center, resize:"250x200^", crop:"250x200+0+0"}).processed %>
-              <% else %>
-                <%= link_to rails_blob_path(production.images[0], disposition: "attachment") do %>
-                  <%= image_tag "no_pdf.jpg",size:'250x200', alt: "Download file" %>
-                <% end %>
-              <% end %>
+              <div class="swiper mySwiper">
+                <div class="swiper-wrapper">
+                  <% production.images.each do |image| %>
+                    <div class="swiper-slide">
+                      <% if production.images[0].representable? %>
+                        <%= image_tag rails_representation_path production.images[0].variant(combine_options:{gravity: :center, resize:"250x200^", crop:"250x200+0+0"}).processed %>
+                      <% else %>
+                        <%= link_to rails_blob_path(production.images[0], disposition: "attachment") do %>
+                          <%= image_tag "no_pdf.jpg",size:'250x200', alt: "Download file" %>
+                        <% end %>
+                      <% end %>
+                    </div>
+                  <% end %>
+                </div>
+                <div class="swiper-pagination"></div>
+              </div>
             <% end %>
             <div class="card-body">
               <div class="card-title">
@@ -33,7 +42,7 @@
         <% end %>
       </div>
 
-      <h4 class="my-3 mx-4">投稿一覧</h4>
+      <h4 class="my-3 mx-4">投稿一覧（新着順）</h4>
       <div class="card-group">
         <% @production.each do |production| %>
           <div class="col-lg-3 col-md-4 col-ms-6 my-2">

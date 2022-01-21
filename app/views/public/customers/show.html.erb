@@ -2,12 +2,10 @@
 
   <div class="row my-5 mx-right">
     <div class="col-6 d-flex justify-content-end mx-auto">
-      <% if @customer.plofile_image.representable? %>
+      <% if @customer.plofile_image.attached? %>
         <%= image_tag @customer.plofile_image.variant( resize: '200x200'), class:"plofile_image" %>
       <% else %>
-        <%= link_to rails_blob_path(plofile_image, disposition: "attachment") do %>
-          <%= image_tag "no_image.jpg", alt: "Download file" %>
-        <% end %>
+        <%= image_tag "no_image.jpg" %>
       <% end %>
     </div>
     <div class="col-6 my-auto mx-auto">
@@ -29,24 +27,28 @@
       <h3 class="text-center">投稿一覧</h3>
     </div>
     <div class="col-8 d-flex justify-content-center mx-auto">
-      <div class="col-10">
-        <% @productions.each do |production| %>
-          <button type="button", class="inline-block button">
-            <% if !production.images.empty? %>
-              <% if production.images[0].representable? %>
-                <%= link_to production_path(production.id) do %>
-                  <%= image_tag rails_representation_path production.images[0].variant(combine_options:{gravity: :center, resize:"250x250^", crop:"250x250+0+0"}).processed, class:"production_image" %>
-                <% end %>
-              <% else %>
-                <%= link_to rails_blob_path(production.images[0], disposition: "attachment") do %>
-                  <%= image_tag "no_pdf.jpg",size:'250x250', alt: "Download file" %>
+      <% if @productions.present? %>
+        <div class="col-10">
+          <% @productions.each do |production| %>
+            <button type="button", class="inline-block button">
+              <% if !production.images.empty? %>
+                <% if production.images[0].representable? %>
+                  <%= link_to production_path(production.id) do %>
+                    <%= image_tag rails_representation_path production.images[0].variant(combine_options:{gravity: :center, resize:"250x250^", crop:"250x250+0+0"}).processed, class:"production_image" %>
+                  <% end %>
+                <% else %>
+                  <%= link_to rails_blob_path(production.images[0], disposition: "attachment") do %>
+                    <%= image_tag "no_pdf.jpg",size:'250x250', alt: "Download file" %>
+                  <% end %>
                 <% end %>
               <% end %>
-            <% end %>
-            <br>
-          </button>
-        <% end %>
-      </div>
+              <br>
+            </button>
+          <% end %>
+        </div>
+      <% else %>
+        <h4 class="my-4">投稿はありません</h4>
+      <% end %>
     </div>
   </div>
 
@@ -55,7 +57,7 @@
       <h3 class="favorite-title">お気に入り</h3>
     </div>
     <div class="col-8 d-flex justify-content-center mx-auto">
-      <div class="col-10 d-flex justify-content-center mx-auto">
+      <div class="col-10 ">
         <% if @favorite_list.present? %>
           <% @favorite_list.each do |favorite| %>
             <button type="button", class="inline-block button">
