@@ -7,8 +7,11 @@ class Public::ProductionsController < ApplicationController
   def create
     @production = Production.new(production_params)
     @production.customer_id = current_customer.id
-    @production.save
-    redirect_to production_path(@production.id), notice: '投稿が完了しました'
+    if @production.save
+      redirect_to production_path(@production.id), notice: '投稿が完了しました'
+    else
+      render :new
+    end
   end
 
   def index

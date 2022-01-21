@@ -9,12 +9,10 @@
             <div class="card-text my-3">
               <div class="row my-5 mx-right">
                 <div class="col-6 d-flex justify-content-end mx-auto">
-                  <% if @production.customer.plofile_image.representable? %>
+                  <% if @production.customer.plofile_image.attached? %>
                     <%= image_tag @production.customer.plofile_image.variant(combine_options:{gravity: :center, resize:"200x200^", crop:"200x200+0+0"}).processed, class:"plofile_image" %>
                   <% else %>
-                    <%= link_to rails_blob_path(plofile_image, disposition: "attachment") do %>
-                      <%= image_tag "no_image.jpg", alt: "Download file" %>
-                    <% end %>
+                    <%= image_tag "no_image.jpg" %>
                   <% end %>
                 </div>
                 <div class="col-6 my-auto mx-auto">
@@ -57,7 +55,7 @@
                         <%= image_tag rails_representation_path image.variant( resize: '850x850') %>
                       <% else %>
                         <%= link_to rails_blob_path(image, disposition: "attachment") do %>
-                          <%= image_tag "no_image.jpg", alt: "Download file" %>
+                          <%= image_tag "no_pdf.jpg", alt: "Download file" %>
                         <% end %>
                       <% end %>
                     </div>

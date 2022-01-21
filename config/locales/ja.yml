@@ -1,0 +1,9 @@
+ja:
+  activerecord:
+    models:
+      production: 投稿
+    attributes:
+      production:
+        title: タイトル
+        introduction: 作品説明
+        images: 画像
