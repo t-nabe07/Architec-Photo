@@ -5,7 +5,6 @@ $(document).on('turbolinks:load', function () {
         grabCursor: true,
         cubeEffect: {
           shadow: true,
-
           shadowOffset: 20,
           shadowScale: 0.44,
         },

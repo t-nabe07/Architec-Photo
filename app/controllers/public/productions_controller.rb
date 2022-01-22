@@ -41,7 +41,7 @@ class Public::ProductionsController < ApplicationController
     if params[:production][:image_ids]
       params[:production][:image_ids].each do |image_id|
         image = @production.images.find(image_id)
-        image.purge.later
+        image.purge
       end
     end
     if @production.update_attributes(production_params)

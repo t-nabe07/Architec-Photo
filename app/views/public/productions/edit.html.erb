@@ -19,6 +19,12 @@
             </div>
             <div class="form-group">
               <div class="card-text my-4">
+                <%= f.label :"画像を選択してください（複数投稿の場合1枚目がサムネ表示されます。PDFは表示されません）" %><br>
+                <%= f.file_field :images, multiple: true %>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="card-text my-5">
                 <%= f.label :images, "現在登録されている作品" %>
                   <% if @production.images.present? %>
                     <p>※削除したい画像にチェックを入れてください</p>

@@ -59,6 +59,17 @@
   width: 90%;
  }
 
+ .comment_form {
+  width: 100%;
+ }
+
+ .production-box {
+  width: 30%;
+  border: 1px solid black;
+  margin-right: 10px;
+  margin-bottom: 10px;
+ }
+
   /*ボタン 投稿一覧*/
  .button {
   padding: 10px;
@@ -94,10 +105,13 @@
  .swiper-slide {
  }
 
- .swiper-slide img {
-  width: 90%;
-  height: 80%;
+ .swiper-slide img,
+ .production-image {
+  width: calc(100% + 30px);
+  margin: 0 -15px;
  }
+
+
 
  .form-table td {
   display: block;

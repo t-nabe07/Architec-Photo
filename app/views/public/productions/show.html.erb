@@ -26,18 +26,16 @@
                   <br>
                   <% if @production.customer == current_customer %>
                     <button class="col-3"><%= link_to "投稿編集", edit_production_path(@production.id) %></button>
-                    <button class="col-3"><%= link_to "投稿削除", production_path(@production), method: :delete %></button>
+                    <button class="col-3"><%= link_to "投稿削除", production_path(@production), method: :delete, "data-confirm" => "本当に削除しますか？" %></button>
                   <% else %>
                      <div class='follow-btn' id="follow"><%= render "public/relationships/follow", customer: @production.customer %></div>
                   <% end %>
                 </div>
               </div>
-
               <div class="col-md-10">
                 <label><h3><%= @production.title %></5></label>
               </div>
             </div>
-
             <div class="col-md-10">
               <label><div class='good-btn' id="good_<%= @production.id %>"><%= render "public/goods/good", production: @production %></div></label>
               <% if @production.customer.id != current_customer.id %>
@@ -66,14 +64,10 @@
               <br>
               <div class="swiper-pagination"></div>
             </div>
-
-
-
             <div class="col-md-10 my-3">
               <label>作品説明</label>
               <label><h5><%= @production.introduction %></5></label>
             </div>
-
             <div class="comments" id="production_<%= @production.id %>">
               <%= render "public/comments/comment", production: @production %>
             </div>
@@ -81,7 +75,7 @@
             <div class="form-table col-md-12 mb-6">
               <%= form_with(model:[@production,@comment],remote: true)do |f| %>
                 <div class="col-lg-12 col-md-12 col-sm-12 mb-6">
-                  <td><%= f.text_area :comment, size: '60%x5%',placeholder:"コメントはこちらに" %></td>
+                  <td><%= f.text_area :comment, size: '60%x5%',class: 'comment_form', placeholder:"コメントはこちらに" %></td>
                   <br>
                   <td><%= f.submit "送信する" %></td>
                 </div>

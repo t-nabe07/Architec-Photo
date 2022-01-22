@@ -21,8 +21,11 @@ class Public::CustomersController < ApplicationController
 
   def update
     @customer = Customer.find(params[:id])
-    @customer.update(customer_params)
-    redirect_to customer_path(@customer.id)
+    if @customer.update(customer_params)
+      redirect_to customer_path(@customer.id), notice: '編集が完了しました'
+    else
+      render :edit
+    end
   end
 
   def unsubscribe
