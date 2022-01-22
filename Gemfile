@@ -76,3 +76,6 @@ gem 'aws-sdk', '3.0.1'
 gem 'dotenv-rails'
 gem 'aws-sdk-s3'
 gem 'image_processing', '~> 1.2'
+group :production do
+  gem 'mysql2'
+end
