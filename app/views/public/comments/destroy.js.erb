@@ -1,0 +1,3 @@
+$("#production_<%= @production.id %>.comments-count").html("コメント件数:<%= @production.comments.count %>");
+$(".comments").html("<%= j(render 'public/comments/comment', production: @production) %>");
+$("#comment_comment").val("");

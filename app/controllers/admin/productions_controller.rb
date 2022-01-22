@@ -1,4 +1,5 @@
 class Admin::ProductionsController < ApplicationController
+  before_action :authenticate_admin!
 
   def index
     @productions = Production.all

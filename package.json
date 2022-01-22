@@ -1,5 +1,7 @@
 {
   "name": "PF",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "swiper": "^7.4.1"
+  }
 }

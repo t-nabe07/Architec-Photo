@@ -1,0 +1,11 @@
+<% if !Favorite.exists?(customer_id: current_customer.id, production_id: production.id) %>
+  <%= link_to production_favorites_path(production.id),method: :post, remote: true, class:"favorite-btn" do %>
+    <i class="fas fa-star star-icon1"></i>
+  <% end %>
+  <span class="star-count1"><%= production.favorites.count %></span>
+<% else %>
+  <%= link_to production_favorites_path(production_id: production.id, id: production.favorites[0].id), method: :delete, remote: true, class:"favorite-btn" do %>
+    <i class="fas fa-star star-icon2"></i>
+  <% end %>
+  <span class="star-count2"><%= production.favorites.count %></span>
+<% end %>

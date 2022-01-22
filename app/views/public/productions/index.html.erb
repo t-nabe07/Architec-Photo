@@ -1,18 +1,72 @@
 <div class="container">
   <div class="row">
-    <div class="col-lg-2">
-    </div>
     <div class="col-lg-12 mx-auto">
-      <h4 class="my-3 mx-4">投稿一覧</h4>
+
+      <h4 class="my-3 mx-4">人気作品</h4>
       <div class="card-group">
-        <% @production.each do |production| %>
+        <% @productions.each do |production| %>
           <div class="col-lg-3 col-md-4 col-ms-6 my-2">
             <% if !production.images.empty? %>
+              <div class="swiper mySwiper">
+                <div class="swiper-wrapper">
+                  <% production.images.each do |image| %>
+                    <div class="swiper-slide">
+                      <% if production.images[0].representable? %>
+                        <%= image_tag rails_representation_path production.images[0].variant(combine_options:{gravity: :center, resize:"200x150^", crop:"200x150+0+0"}).processed %>
+                      <% else %>
+                        <%= link_to rails_blob_path(production.images[0], disposition: "attachment") do %>
+                          <%= image_tag "no_pdf.jpg",size:'200x150', alt: "Download file" %>
+                        <% end %>
+                      <% end %>
+                    </div>
+                  <% end %>
+                </div>
+                <div class="swiper-pagination"></div>
+              </div>
+            <% end %>
+            <div class="card-body">
+              <div class="card-title">
+                <%= link_to production.title, production_path(production.id) %>
+              </div>
+              <div class="card-text">
+                <%= production.introduction %>
+              </div>
+              <div class="comments-count" id="production_<%= production.id %>">
+                <%= "#{production.comments.count}コメント" %>
+              </div>
+              <div class="card-text">
+                <p>♡<%= production.goods.count %>いいね</p>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+
+      <h4 class="my-3 mx-4">投稿一覧（新着順）</h4>
+      <div class="card-group">
+        <% @production.each do |production| %>
+          <div class="production-box col-lg-3 col-md-3 col-ms-3">
+            <% if !production.images.empty? %>
               <% if production.images[0].representable? %>
-                <%= image_tag rails_representation_path production.images[0].variant(resize: '250x250')  %>
+              <div class="swiper mySwiper">
+                <div class="swiper-wrapper">
+                  <% production.images.each do |image| %>
+                    <div class="swiper-slide">
+                      <% if image.representable? %>
+                        <%= image_tag rails_representation_path image.variant(combine_options:{gravity: :center, resize:"250x200^", crop:"250x200+0+0"}).processed,class: 'production-image' %>
+                      <% else %>
+                        <%= link_to rails_blob_path(image, disposition: "attachment") do %>
+                          <%= image_tag "no_image.jpg", alt: "Download file",class: 'production-image' %>
+                        <% end %>
+                      <% end %>
+                    </div>
+                  <% end %>
+                </div>
+                <div class="swiper-pagination"></div>
+              </div>
               <% else %>
                 <%= link_to rails_blob_path(production.images[0], disposition: "attachment") do %>
-                  <%= image_tag "no_pdf.jpg",size:'250x250', alt: "Download file" %>
+                  <%= image_tag "no_pdf.jpg",size:'250x200', alt: "Download file",class: 'production-image' %>
                 <% end %>
               <% end %>
             <% end %>
@@ -23,32 +77,20 @@
               <div class="card-text">
                 <%= production.introduction %>
               </div>
-              <div class="card-text">
-                <%= link_to "#{production.comments.count}コメント",production_path(production.id) %>
+              <div class="comments-count" id="production_<%= production.id %>">
+                <%= "#{production.comments.count}コメント" %>
               </div>
               <div class="card-text">
-                <% if production.gooded_by?(current_customer) %>
-                  <p>
-                    <%= link_to production_goods_path(production),method: :delete do %>
-                      ❤️<%= production.goods.count %>いいね
-                    <% end %>
-                  </p>
-                <% else %>
-                  <p>
-                    <%= link_to production_goods_path(production),method: :post do %>
-                      ♡<%= production.goods.count %>いいね
-                    <% end %>
-                  </p>
-                <% end %>
+                <p>♡<%= production.goods.count %>いいね</p>
               </div>
             </div>
           </div>
         <% end %>
-        <%= paginate @production %>
       </div>
     </div>
   </div>
 </div>
+<%= paginate @production %>
 <br>
 <br>
 <br>

@@ -1,17 +1,22 @@
 class Public::GoodsController < ApplicationController
+  before_action :set_production
+  before_action :authenticate_customer!
 
   def create
-    production = Production.find(params[:production_id])
-    good = current_customer.goods.new(production_id: production.id)
+    @production = Production.find(params[:production_id])
+    good = @production.goods.new(customer_id: current_customer.id)
     good.save
-    redirect_to production_path(production)
   end
 
   def destroy
-    production = Production.find(params[:production_id])
-    good = current_customer.goods.find_by(production_id: production.id)
+    @production = Production.find(params[:production_id])
+    good = @production.goods.find_by(customer_id: current_customer.id)
     good.destroy
-    redirect_to production_path(production)
+  end
+
+  private
+  def set_production
+    @production = Production.find(params[:production_id])
   end
 
 end

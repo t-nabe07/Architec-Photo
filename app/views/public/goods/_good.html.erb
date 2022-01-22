@@ -1,0 +1,5 @@
+<% if production.gooded_by?(current_customer) %>
+  <%= link_to production.goods.count, production_goods_path(production), method: :delete, remote: true, class: "fas fa-heart heart_red" %>
+<% else %>
+  <%= link_to production.goods.count, production_goods_path(production), method: :post, remote: true, class: "fas fa-heart heart_blue" %>
+<% end %>

@@ -13,7 +13,7 @@
  *= require_tree .
  *= require_self
  */
-
+ @import 'swiper/swiper-bundle';
  @import "bootstrap";
  @import 'font-awesome-sprockets';
  @import 'font-awesome';
@@ -39,10 +39,90 @@
 
 
 /*トップページ*/
-
  .jumbotron {
   background-image: image-url("topback.jpg");
   background-position: center center;
   background-size: cover;
   height: 700px;
  }
+
+/*マイページ*/
+ .plofile_image {
+  border-radius: 50%;
+ }
+ .production_image {
+  border-radius: 20px;
+  width: 50%;
+  height: 50%;
+ }
+ .index_image {
+  width: 90%;
+ }
+
+ .comment_form {
+  width: 100%;
+ }
+
+ .production-box {
+  width: 30%;
+  border: 1px solid black;
+  margin-right: 10px;
+  margin-bottom: 10px;
+ }
+
+  /*ボタン 投稿一覧*/
+ .button {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  background-color: #000000;
+  text-align: center;
+ }
+
+ .inline-block{
+  display:inline-block;
+ }
+
+ /*赤いハート*/
+ .heart_red{color:#e54747;}
+ /*青いハート*/
+ .heart_blue{color:#528fff;}
+ /*グレースター*/
+ .star-icon1{color:#808080;}
+ /*黄色スター*/
+ .star-icon2{color:#ffa500;}
+
+ /*ページネーションバー*/
+ .pagination {
+  justify-content: right;
+  margin-right: 10%;
+ }
+
+ /*swiper*/
+ .swiper {
+ }
+
+ .swiper-slide {
+ }
+
+ .swiper-slide img,
+ .production-image {
+  width: calc(100% + 30px);
+  margin: 0 -15px;
+ }
+
+
+
+ .form-table td {
+  display: block;
+  width: 90%;
+ }
+
+ /* swiperページネーション */
+.swiper-pagination {
+ color: fffff0;
+}
+
+.li {
+ color: #ff0000;
+}

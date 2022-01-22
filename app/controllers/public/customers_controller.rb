@@ -1,8 +1,18 @@
 class Public::CustomersController < ApplicationController
+  #URLで直接他人のプロフィール編集不可
+  before_action :ensure_current_customer, {only: [:edit, :update]}
+  def ensure_current_customer
+    if current_customer.id != params[:id].to_i
+      flash[:notice]="権限がありません"
+      redirect_to("/")
+    end
+  end
 
   def show
     @customer = Customer.find(params[:id])
     @productions = @customer.productions.page(params[:page]).reverse_order
+    favorites = Favorite.where(customer_id: current_customer.id).pluck(:production_id)
+    @favorite_list = Production.find(favorites)
   end
 
   def edit
@@ -11,8 +21,11 @@ class Public::CustomersController < ApplicationController
 
   def update
     @customer = Customer.find(params[:id])
-    @customer.update(customer_params)
-    redirect_to customer_path(@customer.id)
+    if @customer.update(customer_params)
+      redirect_to customer_path(@customer.id), notice: '編集が完了しました'
+    else
+      render :edit
+    end
   end
 
   def unsubscribe

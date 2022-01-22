@@ -1,5 +1,8 @@
-<h2>フォロワー一覧</h2>
-<%# binding.pry %>
+<div class="row my-4 mx-auto">
+  <div class="col-12">
+    <h3 class="subtitle">フォロワー一覧</h3>
+  </div>
+</div>
 <% if @customers.exists? %>
   <%= render 'public/customers/index', customers: @customers %>
 <% else %>

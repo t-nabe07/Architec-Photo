@@ -1,91 +1,88 @@
 <div class="container mt-5">
   <div class="row">
-    <div class="col-10 mx-auto">
+    <div class="col-sm-12 col-md-12 col-lg-12">
       <div class="card">
         <div class="card-body">
-          <h2 class="subtitle my-3">products　投稿詳細</h2>
           <p><%= flash[:notice] %></p>
-          <div class="form-group">
+          <div class="container form-contents">
+
             <div class="card-text my-3">
-              <div class="col-md-10">
-                <label>ユーザー画像</label>
-                <label>
-                  <% if @production.customer.plofile_image.representable? %>
-                    <%= image_tag @production.customer.plofile_image.variant( resize: '100x100') %>
-                    <%#= image_tag image.representation(resize_to_limit: [300,300]) %>
+              <div class="row my-5 mx-right">
+                <div class="col-6 d-flex justify-content-end mx-auto">
+                  <% if @production.customer.plofile_image.attached? %>
+                    <%= image_tag @production.customer.plofile_image.variant(combine_options:{gravity: :center, resize:"200x200^", crop:"200x200+0+0"}).processed, class:"plofile_image" %>
                   <% else %>
-                    <%= link_to rails_blob_path(plofile_image, disposition: "attachment") do %>
-                      <%= image_tag "no_image.jpg", alt: "Download file" %>
-                    <% end %>
+                    <%= image_tag "no_image.jpg" %>
                   <% end %>
-                </label>
+                </div>
+                <div class="col-6 my-auto mx-auto">
+                  <div>
+                    <%= @production.customer.full_name %>
+                    フォロー<%= link_to @production.customer.followings.count, customer_followings_path(@production.customer) %>
+                    フォロワー<%= link_to @production.customer.followers.count, customer_followers_path(@production.customer) %>
+                  </div>
+                  <div><%= @production.customer.college_name %> : <%= @production.customer.specialty_study %></div>
+                  <div><%= @production.customer.introduction %></div>
+                  <br>
+                  <% if @production.customer == current_customer %>
+                    <button class="col-3"><%= link_to "投稿編集", edit_production_path(@production.id) %></button>
+                    <button class="col-3"><%= link_to "投稿削除", production_path(@production), method: :delete, "data-confirm" => "本当に削除しますか？" %></button>
+                  <% else %>
+                     <div class='follow-btn' id="follow"><%= render "public/relationships/follow", customer: @production.customer %></div>
+                  <% end %>
+                </div>
               </div>
               <div class="col-md-10">
-　　　　　　　　<label>名前：</label>
-　　　　　　　　<label><%= link_to @production.customer.full_name,customer_path(@production.customer.id) %></label>
-              </div>
-              <div class="col-md-10">
-                <label>作品タイトル:</label>
-                <label><h5><%= @production.title %></5></label>
+                <label><h3><%= @production.title %></5></label>
               </div>
             </div>
             <div class="col-md-10">
+              <label><div class='good-btn' id="good_<%= @production.id %>"><%= render "public/goods/good", production: @production %></div></label>
+              <% if @production.customer.id != current_customer.id %>
+                <label><div class='star-btn' id="favorite_<%= @production.id %>"><%= render "public/favorites/favo", production: @production %></div></label>
+              <% end %>
+              <label><div class="comments-count col-md-12" id="production_<%= @production.id %>"><p>コメント件数:<%= @production.comments.count %></p></div></label>
+            </div>
+
+            <div class="col-md-12">
+              <div class="swiper mySwiper">
+                <div class="swiper-wrapper">
+                  <% @production.images.each do |image| %>
+                    <div class="swiper-slide">
+                      <% if image.representable? %>
+                        <%= image_tag rails_representation_path image.variant( resize: '850x850') %>
+                      <% else %>
+                        <%= link_to rails_blob_path(image, disposition: "attachment") do %>
+                          <%= image_tag "no_pdf.jpg", alt: "Download file" %>
+                        <% end %>
+                      <% end %>
+                    </div>
+                  <% end %>
+                </div>
+              </div>
+              <br>
+              <br>
+              <div class="swiper-pagination"></div>
+            </div>
+            <div class="col-md-10 my-3">
               <label>作品説明</label>
               <label><h5><%= @production.introduction %></5></label>
             </div>
-            <div class="col-md-10">
-              <label>作品画像</label>
+            <div class="comments" id="production_<%= @production.id %>">
+              <%= render "public/comments/comment", production: @production %>
             </div>
-            <div class="col-md-12">
-              <% @production.images.each do |image| %>
-                <% if image.representable? %>
-                  <%= image_tag rails_representation_path image.variant( resize: '300x300') %>
-                  <%#= image_tag image.representation(resize_to_limit: [300,300]) %>
-                <% else %>
-                  <%= link_to rails_blob_path(image, disposition: "attachment") do %>
-                    <%= image_tag "no_image.jpg", alt: "Download file" %>
-                  <% end %>
-                <% end %>
+            <br>
+            <div class="form-table col-md-12 mb-6">
+              <%= form_with(model:[@production,@comment],remote: true)do |f| %>
+                <div class="col-lg-12 col-md-12 col-sm-12 mb-6">
+                  <td><%= f.text_area :comment, size: '60%x5%',class: 'comment_form', placeholder:"コメントはこちらに" %></td>
+                  <br>
+                  <td><%= f.submit "送信する" %></td>
+                </div>
               <% end %>
             </div>
-            <div class="col-md-12">
-              <p>コメント件数:<%= @production.comments.count %></p>
-              <% @production.comments.each do |comment| %>
-                <p>ユーザー画像</p>
-                <%= comment.customer.full_name %>
-                <%= comment.created_at.strftime('%Y/%m/%d') %><%= comment.comment %>
-                <% if comment.customer == current_customer %>
-                  <div>
-                    <%= link_to "コメント削除", production_comment_path(comment.production,comment),method: :delete, class: "btn btn-danger" %>
-                  </div>
-                <% end %>
-              <% end %>
-              <% if @production.gooded_by?(current_customer) %>
-                <p>
-                  <%= link_to production_goods_path(@production),method: :delete do %>
-                    ❤️<%= @production.goods.count %>いいね
-                  <% end %>
-                </p>
-              <% else %>
-                <p>
-                  <%= link_to production_goods_path(@production),method: :post do %>
-                    ♡<%= @production.goods.count %>いいね
-                  <% end %>
-                </p>
-              <% end %>
-            </div>
-            <div class="col-md-12">
-              <%= form_with(model:[@production,@comment],local: true)do |f| %>
-                <%= f.text_area :comment, rows:'5',placeholder:"コメントはこちらに" %>
-                <%= f.submit "送信する" %>
-              <% end %>
-            </div>
-            <%#= render "public/customers/follow" %>
           </div>
-          <% if @production.customer == current_customer %>
-            <div class="col-3"><%= link_to "投稿編集", edit_production_path(@production.id), class: "btn btn-success" %></div>
-            <div class="col-3"><%= link_to "投稿削除", production_path(@production), method: :delete, class: "btn btn-danger" %></div>
-          <% end %>
+
         </div>
       </div>
     </div>
