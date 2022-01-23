@@ -14,7 +14,7 @@
 //= require popper
 //= require bootstrap-sprockets
 
-//= require swiper-bundle.min.js
+// require swiper-bundle.min.js
 //= require swiper.js
 
 //require("turbolinks").start()
