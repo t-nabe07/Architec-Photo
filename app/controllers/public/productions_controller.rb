@@ -1,4 +1,5 @@
 class Public::ProductionsController < ApplicationController
+before_action :authenticate_customer!,except: [:index]
 
   def new
     @production = Production.new

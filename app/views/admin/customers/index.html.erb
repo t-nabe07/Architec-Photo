@@ -4,12 +4,13 @@
     <table class="table table-hover table-inverse mx-5">
       <thead class="thead-light">
         <tr>
-          <th>user_id</th>
-          <th>name</th>
-          <th>college_name</th>
-          <th>specialty_study</th>
+          <th>id</th>
+          <th>ユーザー名</th>
+          <th>大学名</th>
+          <th>専攻</th>
+          <th>投稿数</th>
           <th>email</th>
-          <th>status</th>
+          <th>状態</th>
         </tr>
       </thead>
       <tbody>
@@ -19,6 +20,7 @@
             <td><%= link_to customer.full_name, admin_customer_path(customer.id) %></td>
             <td><%= customer.college_name %></td>
             <td><%= customer.specialty_study %></td>
+            <td><%= customer.productions.count %>件</td>
             <td><%= customer.email %></td>
             <% if customer.is_deleted_i18n == "有効" %>
               <td class="text-success"><%= customer.is_deleted_i18n %></td>

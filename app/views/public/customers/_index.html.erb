@@ -2,12 +2,10 @@
   <div class="row my-4 mx-auto">
     <% @customers.each do |customer| %>
       <div class="col-lg-2 col-md-4 col-sm-4 col-xs-3 mx-auto">
-        <% if customer.plofile_image.representable? %>
-          <%= image_tag customer.plofile_image.variant( resize: '70x70') %>
+        <% if customer.plofile_image.attached? %>
+          <%= image_tag customer.plofile_image.variant(combine_options:{gravity: :center, resize:"70x70^", crop:"70x70+0+0"}).processed, class:"plofile_image" %>
         <% else %>
-          <%= link_to rails_blob_path(plofile_image, disposition: "attachment") do %>
-            <%= image_tag "no_image.jpg", alt: "Download file" %>
-          <% end %>
+           <%= image_tag "no_image.jpg", size: '70x70' %>
         <% end %>
       </div>
       <div class="col-lg-5 col-md-4 col-sm-4 col-xs-3 mx-auto">
@@ -32,3 +30,6 @@
     <% end %>
   </div>
 </div>
+<br>
+<br>
+<br>

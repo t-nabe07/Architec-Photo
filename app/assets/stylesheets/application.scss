@@ -59,10 +59,12 @@
   width: 90%;
  }
 
+/*投稿詳細*/
  .comment_form {
   width: 100%;
  }
 
+/*投稿一覧*/
  .production-box {
   width: 30%;
   border: 1px solid black;
@@ -70,7 +72,7 @@
   margin-bottom: 10px;
  }
 
-  /*ボタン 投稿一覧*/
+/*ボタン 投稿一覧*/
  .button {
   padding: 10px;
   border-radius: 5px;
@@ -99,30 +101,13 @@
  }
 
  /*swiper*/
- .swiper {
- }
-
- .swiper-slide {
- }
-
  .swiper-slide img,
  .production-image {
   width: calc(100% + 30px);
   margin: 0 -15px;
  }
 
-
-
- .form-table td {
-  display: block;
-  width: 90%;
- }
-
  /* swiperページネーション */
 .swiper-pagination {
  color: fffff0;
-}
-
-.li {
- color: #ff0000;
 }

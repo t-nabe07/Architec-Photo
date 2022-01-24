@@ -3,9 +3,9 @@
   <div class="row my-5 mx-right">
     <div class="col-6 d-flex justify-content-end mx-auto">
       <% if @customer.plofile_image.attached? %>
-        <%= image_tag @customer.plofile_image.variant( resize: '200x200'), class:"plofile_image" %>
+        <%= image_tag @customer.plofile_image.variant(combine_options:{gravity: :center, resize:"200x200^", crop:"200x200+0+0"}).processed, class:"plofile_image" %>
       <% else %>
-        <%= image_tag "no_image.jpg" %>
+        <%= image_tag "no_image.jpg", size: '200x200' %>
       <% end %>
     </div>
     <div class="col-6 my-auto mx-auto">
@@ -47,7 +47,7 @@
           <% end %>
         </div>
       <% else %>
-        <h4 class="my-4">投稿はありません</h4>
+        <h6 class="my-4">投稿はありません</h4>
       <% end %>
     </div>
   </div>
@@ -57,7 +57,7 @@
       <h3 class="favorite-title">お気に入り</h3>
     </div>
     <div class="col-8 d-flex justify-content-center mx-auto">
-      <div class="col-10 ">
+      <div class="col-8 d-flex justify-content-center mx-auto">
         <% if @favorite_list.present? %>
           <% @favorite_list.each do |favorite| %>
             <button type="button", class="inline-block button">
@@ -76,7 +76,7 @@
             </button>
           <% end %>
         <% else %>
-          <p>お気に入りはありません</p>
+          <h6 class="my-4">お気に入りはありません</h6>
         <% end %>
       </div>
     </div>

@@ -7,22 +7,24 @@
         <% @productions.each do |production| %>
           <div class="col-lg-3 col-md-4 col-ms-6 my-2">
             <% if !production.images.empty? %>
-              <div class="swiper mySwiper">
-                <div class="swiper-wrapper">
-                  <% production.images.each do |image| %>
-                    <div class="swiper-slide">
-                      <% if production.images[0].representable? %>
-                        <%= image_tag rails_representation_path production.images[0].variant(combine_options:{gravity: :center, resize:"200x150^", crop:"200x150+0+0"}).processed %>
-                      <% else %>
-                        <%= link_to rails_blob_path(production.images[0], disposition: "attachment") do %>
-                          <%= image_tag "no_pdf.jpg",size:'200x150', alt: "Download file" %>
+              <% if production.images[0].representable? %>
+                <div class="swiper mySwiper">
+                  <div class="swiper-wrapper">
+                    <% production.images.each do |image| %>
+                      <div class="swiper-slide">
+                        <% if image.representable? %>
+                          <%= image_tag rails_representation_path image.variant(combine_options:{gravity: :center, resize:"200x150^", crop:"200x150+0+0"}).processed %>
+                        <% else %>
+                          <%= link_to rails_blob_path(production.images[0], disposition: "attachment") do %>
+                            <%= image_tag "no_pdf.jpg",size:'200x150', alt: "Download file" %>
+                          <% end %>
                         <% end %>
-                      <% end %>
-                    </div>
-                  <% end %>
+                      </div>
+                    <% end %>
+                  </div>
+                  <div class="swiper-pagination"></div>
                 </div>
-                <div class="swiper-pagination"></div>
-              </div>
+              <% end %>
             <% end %>
             <div class="card-body">
               <div class="card-title">
@@ -48,26 +50,22 @@
           <div class="production-box col-lg-3 col-md-3 col-ms-3">
             <% if !production.images.empty? %>
               <% if production.images[0].representable? %>
-              <div class="swiper mySwiper">
-                <div class="swiper-wrapper">
-                  <% production.images.each do |image| %>
-                    <div class="swiper-slide">
-                      <% if image.representable? %>
-                        <%= image_tag rails_representation_path image.variant(combine_options:{gravity: :center, resize:"250x200^", crop:"250x200+0+0"}).processed,class: 'production-image' %>
-                      <% else %>
-                        <%= link_to rails_blob_path(image, disposition: "attachment") do %>
-                          <%= image_tag "no_image.jpg", alt: "Download file",class: 'production-image' %>
+                <div class="swiper mySwiper">
+                  <div class="swiper-wrapper">
+                    <% production.images.each do |image| %>
+                      <div class="swiper-slide">
+                        <% if image.representable? %>
+                          <%= image_tag rails_representation_path image.variant(combine_options:{gravity: :center, resize:"250x200^", crop:"250x200+0+0"}).processed,class: 'production-image' %>
+                        <% else %>
+                          <%= link_to rails_blob_path(production.images[0], disposition: "attachment") do %>
+                            <%= image_tag "no_pdf.jpg",size:'200x150', alt: "Download file" %>
+                          <% end %>
                         <% end %>
-                      <% end %>
-                    </div>
-                  <% end %>
+                      </div>
+                    <% end %>
+                  </div>
+                  <div class="swiper-pagination"></div>
                 </div>
-                <div class="swiper-pagination"></div>
-              </div>
-              <% else %>
-                <%= link_to rails_blob_path(production.images[0], disposition: "attachment") do %>
-                  <%= image_tag "no_pdf.jpg",size:'250x200', alt: "Download file",class: 'production-image' %>
-                <% end %>
               <% end %>
             <% end %>
             <div class="card-body">

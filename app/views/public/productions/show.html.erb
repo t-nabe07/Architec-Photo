@@ -17,7 +17,7 @@
                 </div>
                 <div class="col-6 my-auto mx-auto">
                   <div>
-                    <%= @production.customer.full_name %>
+                    <%= link_to @production.customer.full_name, customer_path(@production.customer) %>
                     フォロー<%= link_to @production.customer.followings.count, customer_followings_path(@production.customer) %>
                     フォロワー<%= link_to @production.customer.followers.count, customer_followers_path(@production.customer) %>
                   </div>
