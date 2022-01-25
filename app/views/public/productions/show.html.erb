@@ -24,12 +24,14 @@
                   <div><%= @production.customer.college_name %> : <%= @production.customer.specialty_study %></div>
                   <div><%= @production.customer.introduction %></div>
                   <br>
+
                   <% if @production.customer == current_customer %>
-                    <button class="col-3"><%= link_to "投稿編集", edit_production_path(@production.id) %></button>
-                    <button class="col-3"><%= link_to "投稿削除", production_path(@production), method: :delete, "data-confirm" => "本当に削除しますか？" %></button>
+                    <%= link_to "投稿編集", edit_production_path(@production.id), class: "btn btn-create" %>
+                    <%= link_to "投稿削除", production_path(@production), method: :delete, class: "btn btn-delete", "data-confirm" => "本当に削除しますか？" %>
                   <% else %>
                      <div class='follow-btn' id="follow"><%= render "public/relationships/follow", customer: @production.customer %></div>
                   <% end %>
+
                 </div>
               </div>
               <div class="col-md-10">
@@ -77,7 +79,7 @@
                 <div class="col-lg-12 col-md-12 col-sm-12 mb-6">
                   <td><%= f.text_area :comment, size: '60%x5%',class: 'comment_form', placeholder:"コメントはこちらに" %></td>
                   <br>
-                  <td><%= f.submit "送信する" %></td>
+                  <td><%= f.submit "送信する", class: "btn btn-border" %></td>
                 </div>
               <% end %>
             </div>

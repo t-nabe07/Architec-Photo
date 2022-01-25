@@ -13,30 +13,23 @@
  *= require_tree .
  *= require_self
  */
-
  @import "bootstrap";
  @import 'font-awesome-sprockets';
  @import 'font-awesome';
 
-
 /*header,footer*/
-
  .navbar-toggler {
   background-color: #f0f8ff;
  }
-
  .navbar-toggler-icon {
   background-color: #000000;
  }
-
  .login-message {
   color: #ffffff;
  }
-
  li {
   list-style: none;
  }
-
 
 /*トップページ*/
  .jumbotron {
@@ -70,9 +63,10 @@
   border: 1px solid black;
   margin-right: 10px;
   margin-bottom: 10px;
+  box-sizing: border-box;
  }
 
-/*ボタン 投稿一覧*/
+/*ボタンタグ 投稿一覧*/
  .button {
   padding: 10px;
   border-radius: 5px;
@@ -81,9 +75,43 @@
   text-align: center;
  }
 
- .inline-block{
-  display:inline-block;
+/*create login signup comment*/
+ .btn-border {
+  border: 2px solid #000;
+  border-radius: 0;
+  background: #fff;
+  -webkit-box-shadow: 4px 4px 0 #000;
+  box-shadow: 4px 4px 0 #000;
  }
+ .btn-border:hover {
+  -webkit-box-shadow: -4px -4px 0 #000;
+  box-shadow: -4px -4px 0 #000;
+ }
+/*edit follow*/
+  .btn-create {
+  border: 2px solid #000;
+  border-radius: 0;
+  background: #8fbc8f;
+  -webkit-box-shadow: 4px 4px 0 #000;
+  box-shadow: 4px 4px 0 #000;
+ }
+ .btn-create:hover {
+  -webkit-box-shadow: -4px -4px 0 #000;
+  box-shadow: -4px -4px 0 #000;
+ }
+/*削除系*/
+ .btn-delete {
+  border: 2px solid #000;
+  border-radius: 0;
+  background: #f0c0cb;
+  -webkit-box-shadow: 4px 4px 0 #000;
+  box-shadow: 4px 4px 0 #000;
+ }
+ .btn-delete:hover {
+  -webkit-box-shadow: -4px -4px 0 #000;
+  box-shadow: -4px -4px 0 #000;
+ }
+
 
  /*赤いハート*/
  .heart_red{color:#e54747;}

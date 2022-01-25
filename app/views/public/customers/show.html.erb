@@ -12,7 +12,7 @@
       <div class="my-3">
         <%= @customer.full_name %>
         <% if @customer.id == current_customer.id %>
-          <button><i class="fa fa-cog"><%= link_to "プロフィール編集", edit_customer_path(@customer) %></i></button>
+          <button><i class="fa fa-cog"><%= link_to "  ", edit_customer_path(@customer) %></i></button>
         <% end %>
         フォロー<%= link_to @customer.followings.count, customer_followings_path(@customer) %>
         フォロワー<%= link_to @customer.followers.count, customer_followers_path(@customer) %>
