@@ -1,7 +1,7 @@
 <div class="container-fluid">
 
   <div class="row my-5 mx-right">
-    <div class="col-6 d-flex justify-content-end mx-auto">
+    <div class="col-6 h-50 d-flex justify-content-end mx-auto">
       <% if @customer.plofile_image.attached? %>
         <%= image_tag @customer.plofile_image.variant(combine_options:{gravity: :center, resize:"200x200^", crop:"200x200+0+0"}).processed, class:"plofile_image" %>
       <% else %>
@@ -11,60 +11,39 @@
     <div class="col-6 my-auto mx-auto">
       <div class="my-3">
         <%= @customer.full_name %>
-        <% if @customer.id == current_customer.id %>
-          <button><i class="fa fa-cog"><%= link_to "  ", edit_customer_path(@customer) %></i></button>
-        <% end %>
         フォロー<%= link_to @customer.followings.count, customer_followings_path(@customer) %>
         フォロワー<%= link_to @customer.followers.count, customer_followers_path(@customer) %>
       </div>
       <div class="my-3"><%= @customer.college_name %> : <%= @customer.specialty_study %></div>
-      <div class="my-3"><%= @customer.introduction %></div>
-    </div>
-  </div>
-
-　<div class="row d-flex justify-content-center">
-　  <div class="col-8 d-flex justify-content-center mx-auto">
-      <h3 class="text-center">投稿一覧</h3>
-    </div>
-    <div class="col-8 d-flex justify-content-center mx-auto">
-      <% if @productions.present? %>
-        <div class="col-10">
-          <% @productions.each do |production| %>
-            <button type="button", class="inline-block button">
-              <% if !production.images.empty? %>
-                <% if production.images[0].representable? %>
-                  <%= link_to production_path(production.id) do %>
-                    <%= image_tag rails_representation_path production.images[0].variant(combine_options:{gravity: :center, resize:"250x250^", crop:"250x250+0+0"}).processed, class:"production_image" %>
-                  <% end %>
-                <% else %>
-                  <%= link_to rails_blob_path(production.images[0], disposition: "attachment") do %>
-                    <%= image_tag "no_pdf.jpg",size:'250x250', alt: "Download file" %>
-                  <% end %>
-                <% end %>
-              <% end %>
-              <br>
-            </button>
-          <% end %>
-        </div>
+      <% if @customer.introduction.present? %>
+        <div class="form my-3"><%= @customer.introduction %></div>
       <% else %>
-        <h6 class="my-4">投稿はありません</h4>
+        <td>紹介文がありません。</td>
+      <% end %>
+      <% if @customer.id == current_customer.id %>
+        <button><i class="fa fa-cog"><%= link_to "編集", edit_customer_path(@customer) %></i></button>
+      <% else %>
+        <br>
+        <br>
+        <label class='follow-btn' id="follow"><%= render "public/relationships/follow", customer: @customer %></label>
       <% end %>
     </div>
   </div>
 
-  <div class="row my-5">
-    <div class="col-8 d-flex justify-content-center mx-auto">
-      <h3 class="favorite-title">お気に入り</h3>
+　<div class="row">
+　  <div class="col-8 d-flex justify-content-center mx-auto">
+      <h4>投稿一覧</h4>
     </div>
-    <div class="col-8 d-flex justify-content-center mx-auto">
-      <div class="col-8 d-flex justify-content-center mx-auto">
-        <% if @favorite_list.present? %>
-          <% @favorite_list.each do |favorite| %>
-            <button type="button", class="inline-block button">
-              <% if !favorite.images.empty? %>
-                  <% if favorite.images[0].representable? %>
-                    <%= link_to production_path(favorite.id) do %>
-                      <%= image_tag rails_representation_path favorite.images[0].variant(combine_options:{gravity: :center, resize:"250x250^", crop:"250x250+0+0"}).processed %>
+    <div class="col-12 justify-content-center mx-auto">
+      <% if @productions.present? %>
+        <div class="row col-lg-8 col-md-12 col-sm-12 col-12 mx-auto">
+          <% @productions.each do |production| %>
+            <div class="col-lg-4 col-md-4 col-sm-4 col-4 mt-3">
+              <button type="button", class="inline-block button">
+                <% if !production.images.empty? %>
+                  <% if production.images[0].representable? %>
+                    <%= link_to production_path(production.id) do %>
+                      <%= image_tag rails_representation_path production.images[0].variant(combine_options:{gravity: :center, resize:"250x250^", crop:"250x250+0+0"}).processed, class:"production_image" %>
                     <% end %>
                   <% else %>
                     <%= link_to rails_blob_path(production.images[0], disposition: "attachment") do %>
@@ -72,13 +51,46 @@
                     <% end %>
                   <% end %>
                 <% end %>
-              <br>
-            </button>
+                <br>
+              </button>
+            </div>
+          <% end %>
+        </div>
+      <% else %>
+        <h6 class="my-4 mx-auto">投稿はありません</h4>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="row my-5">
+    <div class="col-8 d-flex justify-content-center mx-auto">
+      <h4>お気に入り</h4>
+    </div>
+    <div class="col-12 justify-content-center mx-auto">
+      <% if @favorite_list.present? %>
+        <div class="row col-lg-8 col-md-12 col-sm-12 col-12 mx-auto">
+          <% @favorite_list.each do |favorite| %>
+            <div class="col-lg-4 col-md-4 col-sm-4 col-4 mt-4">
+              <button type="button", class="inline-block button">
+                <% if !favorite.images.empty? %>
+                    <% if favorite.images[0].representable? %>
+                      <%= link_to production_path(favorite.id) do %>
+                        <%= image_tag rails_representation_path favorite.images[0].variant(combine_options:{gravity: :center, resize:"250x250^", crop:"250x250+0+0"}).processed %>
+                      <% end %>
+                    <% else %>
+                      <%= link_to rails_blob_path(production.images[0], disposition: "attachment") do %>
+                        <%= image_tag "no_pdf.jpg",size:'250x250', alt: "Download file" %>
+                      <% end %>
+                    <% end %>
+                  <% end %>
+                <br>
+              </button>
+            </div>
           <% end %>
         <% else %>
           <h6 class="my-4">お気に入りはありません</h6>
-        <% end %>
-      </div>
+        </div>
+      <% end %>
     </div>
   </div>
 

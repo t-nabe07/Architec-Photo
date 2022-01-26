@@ -31,13 +31,11 @@
                 <%= link_to production.title, production_path(production.id) %>
               </div>
               <div class="card-text">
-                <%= production.introduction %>
+                <p><%= production.introduction %></p>
               </div>
               <div class="comments-count" id="production_<%= production.id %>">
-                <%= "#{production.comments.count}コメント" %>
-              </div>
-              <div class="card-text">
-                <p>♡<%= production.goods.count %>いいね</p>
+                <span>✏️<%= "#{production.comments.count}" %></span>
+                <span>❤️<%= production.goods.count %></span>
               </div>
             </div>
           </div>
@@ -45,41 +43,41 @@
       </div>
 
       <h4 class="my-3 mx-4">新着一覧</h4>
-      <div class="card-group">
+      <div class="row card-group">
         <% @production.each do |production| %>
-          <div class="production-box col-lg-3 col-md-3 col-ms-3">
-            <% if !production.images.empty? %>
-              <% if production.images[0].representable? %>
-                <div class="swiper mySwiper">
-                  <div class="swiper-wrapper">
-                    <% production.images.each do |image| %>
-                      <div class="swiper-slide">
-                        <% if image.representable? %>
-                          <%= image_tag rails_representation_path image.variant(combine_options:{gravity: :center, resize:"250x200^", crop:"250x200+0+0"}).processed,class: 'production-image' %>
-                        <% else %>
-                          <%= link_to rails_blob_path(production.images[0], disposition: "attachment") do %>
-                            <%= image_tag "no_pdf.jpg",size:'200x150', alt: "Download file" %>
+          <div class="col-lg-3 col-md-4 col-ms-6">
+            <div class="production-box col-lg-12">
+              <% if !production.images.empty? %>
+                <% if production.images[0].representable? %>
+                  <div class="swiper mySwiper">
+                    <div class="swiper-wrapper">
+                      <% production.images.each do |image| %>
+                        <div class="swiper-slide">
+                          <% if image.representable? %>
+                            <%= image_tag rails_representation_path image.variant(combine_options:{gravity: :center, resize:"250x200^", crop:"250x200+0+0"}).processed,class: 'production-image' %>
+                          <% else %>
+                            <%= link_to rails_blob_path(production.images[0], disposition: "attachment") do %>
+                              <%= image_tag "no_pdf.jpg",size:'200x150', alt: "Download file" %>
+                            <% end %>
                           <% end %>
-                        <% end %>
-                      </div>
-                    <% end %>
+                        </div>
+                      <% end %>
+                    </div>
+                    <div class="swiper-pagination"></div>
                   </div>
-                  <div class="swiper-pagination"></div>
-                </div>
+                <% end %>
               <% end %>
-            <% end %>
-            <div class="card-body">
-              <div class="card-title">
-                <%= link_to production.title, production_path(production.id) %>
-              </div>
-              <div class="card-text">
-                <%= production.introduction %>
-              </div>
-              <div class="comments-count" id="production_<%= production.id %>">
-                <%= "#{production.comments.count}コメント" %>
-              </div>
-              <div class="card-text">
-                <p>♡<%= production.goods.count %>いいね</p>
+              <div class="card-body">
+                <div class="card-title">
+                  <%= link_to production.title, production_path(production.id) %>
+                </div>
+                <div class="card-text">
+                  <%= production.introduction %>
+                </div>
+                <div class="comments-count" id="production_<%= production.id %>">
+                  <span>✏️<%= "#{production.comments.count}" %></span>
+                  <span>❤️<%= production.goods.count %></span>
+                </div>
               </div>
             </div>
           </div>
@@ -88,6 +86,7 @@
     </div>
   </div>
 </div>
+<br>
 <%= paginate @production %>
 <br>
 <br>

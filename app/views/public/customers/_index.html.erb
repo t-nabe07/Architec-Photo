@@ -1,31 +1,33 @@
 <div class="container">
   <div class="row my-4 mx-auto">
     <% @customers.each do |customer| %>
-      <div class="col-lg-2 col-md-4 col-sm-4 col-xs-3 mx-auto">
-        <% if customer.plofile_image.attached? %>
-          <%= image_tag customer.plofile_image.variant(combine_options:{gravity: :center, resize:"70x70^", crop:"70x70+0+0"}).processed, class:"plofile_image" %>
-        <% else %>
-           <%= image_tag "no_image.jpg", size: '70x70' %>
-        <% end %>
-      </div>
-      <div class="col-lg-5 col-md-4 col-sm-4 col-xs-3 mx-auto">
-        <label><%= link_to customer.full_name, customer_path(customer), class: "customer_#{customer.id}" %></label>
-        <label>（<%= customer.college_name %>）</label>
-        <br>
-        <label>投稿数<%= customer.productions.count %>件</label>
-        <label>フォロー数: <%= customer.followings.count %></label>
-        <label>フォロワー数: <%= customer.followers.count %></label>
-        <br>
-        <label class='follow-btn' id="follow"><%= render "public/relationships/follow", customer: customer %></label>
-      </div>
-      <div class="col-lg-5 col-md-4 col-sm-4 col-xs-3 mx-auto">
-        <td>自己紹介</td>
-        <br>
-        <% if customer.introduction.present? %>
-          <td><%= customer.introduction %></td>
-        <% else %>
-          <td>紹介文がありません。</td>
-        <% end %>
+      <div class="follow-box row">
+        <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 col-5 mx-auto">
+          <% if customer.plofile_image.attached? %>
+            <%= image_tag customer.plofile_image.variant(combine_options:{gravity: :center, resize:"70x70^", crop:"70x70+0+0"}).processed, class:"plofile_image" %>
+          <% else %>
+             <%= image_tag "no_image.jpg", size: '70x70' %>
+          <% end %>
+        </div>
+        <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 col-5 mx-auto">
+          <label><%= link_to customer.full_name, customer_path(customer), class: "customer_#{customer.id}" %></label>
+          <label>（<%= customer.college_name %>）</label>
+          <br>
+          <label>投稿数<%= customer.productions.count %>件</label>
+          <label>フォロー数: <%= customer.followings.count %></label>
+          <label>フォロワー数: <%= customer.followers.count %></label>
+          <br>
+          <label class='follow-btn' id="follow"><%= render "public/relationships/follow", customer: customer %></label>
+        </div>
+        <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 col-10 mx-auto">
+          <td>自己紹介</td>
+          <br>
+          <% if customer.introduction.present? %>
+            <td><%= customer.introduction %></td>
+          <% else %>
+            <td>紹介文がありません。</td>
+          <% end %>
+        </div>
       </div>
     <% end %>
   </div>

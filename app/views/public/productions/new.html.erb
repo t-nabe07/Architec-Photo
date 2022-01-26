@@ -3,7 +3,7 @@
     <div class="col-10 mx-auto">
       <div class="card">
         <div class="card-body">
-          <h3 class="card-title my-3">products　新規投稿</h5>
+          <h3 class="card-title my-3">新規投稿</h5>
           <%= render "layouts/error" %>
           <%= form_with model: @production,url:'/productions',local:true do |f| %>
             <div class="form-group">
@@ -15,7 +15,7 @@
             <div class="form-group">
               <div class="card-text">
                 <%= f.label :"作品説明" %>
-                <%= f.text_area :introduction,class: "form-control" %>
+                <%= f.text_area :introduction, size: '60%x5%', class: "form-control form" %>
               </div>
             </div>
             <div class="form-group">
@@ -24,7 +24,7 @@
                 <%= f.file_field :images, multiple: true %>
               </div>
             </div>
-            <div class="col-1 mx-auto">
+            <div class="col-3 mx-auto">
               <%= f.submit 'create', class: "btn btn-border" %>
             </div>
           <% end %>

@@ -34,10 +34,6 @@ before_action :authenticate_customer!,except: [:index]
   end
 
   def update #複数画像の場合選択削除
-    # @production = Production.find(params[:id])
-    # @production.images.purge
-    # @production.update(production_params)
-    # redirect_to production_path(@production.id)
     @production = Production.find(params[:id])
     if params[:production][:image_ids]
       params[:production][:image_ids].each do |image_id|

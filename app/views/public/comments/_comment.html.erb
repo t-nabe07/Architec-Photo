@@ -16,12 +16,13 @@
         <td>
           <% if comment.customer == current_customer %>
             <div>
-              <%= link_to "コメント削除", production_comment_path(comment.production,comment),method: :delete, remote: true, class: "btn btn-danger" %>
+              <%= link_to "コメント削除", production_comment_path(comment.production,comment),method: :delete, remote: true, class: "btn btn-delete" %>
             </div>
           <% end %>
         </td>
       </tr>
     </table>
+    <br>
   <% end %>
 <% else %>
   <p>コメントはまだありません</p>

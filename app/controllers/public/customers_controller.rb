@@ -1,4 +1,5 @@
 class Public::CustomersController < ApplicationController
+  before_action :authenticate_customer!
   #URLで直接他人のプロフィール編集不可
   before_action :ensure_current_customer, {only: [:edit, :update]}
   def ensure_current_customer
@@ -42,7 +43,8 @@ class Public::CustomersController < ApplicationController
   private
 
   def customer_params
-    params.require(:customer).permit(:last_name, :first_name, :last_name_kana, :first_name_kana, :introduction, :college_name, :specialty_study, :plofile_image)
+    params.require(:customer).permit(:last_name, :first_name, :last_name_kana, :first_name_kana,
+                                     :introduction, :college_name, :specialty_study, :plofile_image)
   end
 
 end

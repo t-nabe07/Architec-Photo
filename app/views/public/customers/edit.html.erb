@@ -1,9 +1,9 @@
 <div class="container mt-5">
   <div class="row">
-    <div class="col-10 mx-auto">
+    <div class="col-lg-10 col-sm-10 col-md-10 col-10 mx-auto">
       <div class="card">
         <div class="card-body">
-          <h2 class="subtitle"><%= @customer.full_name %>さんの編集</h2>
+          <h3 class="subtitle"><%= @customer.full_name %>さんの編集</h2>
           <% if @customer.errors.any? %>
             <div class="alert-message">
               <ul>
@@ -20,45 +20,40 @@
                 <%= f.file_field :plofile_image %>
               </div>
             </div>
-            <div class="form-group">
-              <div class="card-text">
-                <%= f.label :"名前", class:"col-sm-2 form-label" %>
-                <%= f.label :"姓", class:"col-sm-1 form-label" %>
-                <%= f.text_field :last_name, autofocus: true, class:"col-sm-3" %>
-                <%= f.label :"名", class:"col-sm-1 form-label" %>
-                <%= f.text_field :first_name, class:"col-sm-3" %>
+            <div class="row">
+              <div class="col-lg-6 col-sm-6 col-md-6 mb-3">
+                <%= f.label :"姓" %>
+                <%= f.text_field :last_name, autofocus: true, class:"form-control" %>
               </div>
-            </div>
-            <div class="form-group">
-              <div class="card-text">
-                <%= f.label :"カナ", class:"col-sm-2 form-label" %>
-                <%= f.label :"セイ", class:"col-sm-1 form-label" %>
-                <%= f.text_field :last_name_kana, class:"col-sm-3" %>
-                <%= f.label :"メイ", class:"col-sm-1 form-label" %>
-                <%= f.text_field :first_name_kana, class:"col-sm-3" %>
+              <div class="col-lg-6 col-sm-6 col-md-6 mb-3">
+                <%= f.label :"名" %>
+                <%= f.text_field :first_name, class:"form-control" %>
               </div>
-            </div>
-            <div class="form-group">
-              <div class="card-text">
-                <%= f.label :"自己紹介", class:"col-sm-2 form-label" %>
-                <%= f.text_area :introduction, class:"col-sm-8" %>
+              <div class="col-lg-6 col-sm-6 col-md-6 mb-3">
+                <%= f.label :"カナ（セイ）" %>
+                <%= f.text_field :last_name_kana, class:"form-control" %>
               </div>
-            </div>
-            <div class="form-group">
-              <div class="card-text">
-                <%= f.label :"大学名称", class:"col-sm-2 form-label" %>
-                <%= f.text_field :college_name, placeholder:"大学名称(正式名称で入力してください)", class:"col-sm-8" %>
+              <div class="col-lg-6 col-sm-6 col-md-6 mb-3">
+                <%= f.label :"カナ（メイ）" %>
+                <%= f.text_field :first_name_kana, class:"form-control" %>
               </div>
-            </div>
-            <div class="form-group">
-              <div class="card-text">
-                <%= f.label :"専攻", class:"col-sm-2 form-label" %>
-                <%= f.text_field :specialty_study,placeholder:"専攻(正式名称で入力してください)", class:"col-sm-8" %>
+              <div class="col-lg-12 col-sm-12 col-md-12 mb-3">
+                <%= f.label :"自己紹介" %>
+                <%= f.text_area :introduction, class:"form-control" %>
+              </div>
+              <div class="col-lg-6 col-sm-6 col-md-6 mb-3">
+                <%= f.label :"大学名称" %>
+                <%= f.text_field :college_name, placeholder:"大学名称(正式名称で入力してください)", class:"form-control" %>
+              </div>
+              <div class="col-lg-6 col-sm-6 col-md-6 mb-3">
+                <%= f.label :"専攻" %>
+                <%= f.text_field :specialty_study,placeholder:"専攻(正式名称で入力してください)", class:"form-control" %>
               </div>
             </div>
             <span class="col-3 mx-auto">
-              <span><%= f.submit '編集内容を保存', class: "btn btn-success" %></span>
-              <span><%= link_to '退会する',unsubscribe_path(@customer), class: "btn btn-danger" %></span>
+              <span class="withdraw"><%= f.submit '編集内容を保存', class: "btn btn-create" %></span>
+              <br>
+              <span class="withdraw"><%= link_to '退会する',unsubscribe_path(@customer), class: "btn btn-delete" %></span>
             </span>
           <% end %>
         </div>

@@ -16,6 +16,14 @@
  @import "bootstrap";
  @import 'font-awesome-sprockets';
  @import 'font-awesome';
+ @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital@1&display=swap');
+
+/*font*/
+ body {
+ font-family: 'Noto Sans', sans-serif;
+ font-size: 14px;
+ background-color: #eeeeee;
+ }
 
 /*header,footer*/
  .navbar-toggler {
@@ -37,19 +45,13 @@
   background-position: center center;
   background-size: cover;
   height: 700px;
+  font-size: medium;
+  background-color: ffa500;
  }
 
 /*マイページ*/
  .plofile_image {
   border-radius: 50%;
- }
- .production_image {
-  border-radius: 20px;
-  width: 50%;
-  height: 50%;
- }
- .index_image {
-  width: 90%;
  }
 
 /*投稿詳細*/
@@ -59,10 +61,8 @@
 
 /*投稿一覧*/
  .production-box {
-  width: 30%;
   border: 1px solid black;
-  margin-right: 10px;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   box-sizing: border-box;
  }
 
@@ -73,6 +73,16 @@
   border: 1px solid #ddd;
   background-color: #000000;
   text-align: center;
+ }
+/*マイページ編集完了ボタン位置*/
+ .withdraw {
+ display: block;
+ text-align: right;
+ }
+/*フォロー一覧ページ*/
+ .follow-box {
+  border-bottom: 1px solid black;
+  margin-bottom: 20px;
  }
 
 /*create login signup comment*/
@@ -88,7 +98,7 @@
   box-shadow: -4px -4px 0 #000;
  }
 /*edit follow*/
-  .btn-create {
+ .btn-create {
   border: 2px solid #000;
   border-radius: 0;
   background: #8fbc8f;
@@ -139,3 +149,24 @@
 .swiper-pagination {
  color: fffff0;
 }
+
+/*画像サイズ*/
+ .button a img {
+  width: 100%;
+ }
+
+/*長い文は...表示*/
+ .card-text,.card-title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+ }
+/*作品説明のみ改行反映*/
+ .form {
+  white-space: pre-wrap;
+  text-align: left;
+ }
+ /*投稿ない場合の文字*/
+ h6{
+  text-align: center;
+ }
