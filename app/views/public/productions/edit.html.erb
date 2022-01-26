@@ -4,6 +4,7 @@
       <div class="card">
         <div class="card-body">
           <h5 class="subtitle my-3">投稿内容の編集</h2>
+          <%= render "layouts/error" %>
           <%= form_with model:@production,url:"/productions/#{@production.id}",local:true do |f| %>
             <div class="form-group">
               <div class="card-text">
