@@ -30,7 +30,9 @@
                       <%= link_to "編集", edit_production_path(@production.id), class: "btn btn-create" %>
                       <%= link_to "削除", production_path(@production), method: :delete, class: "btn btn-delete", "data-confirm" => "本当に削除しますか？" %>
                     <% else %>
-                       <div class='follow-btn' id="follow"><%= render "public/relationships/follow", customer: @production.customer %></div>
+                       <div class='follow-btn' id="follow">
+                         <%= render "public/relationships/follow", customer: @production.customer %>
+                        </div>
                     <% end %>
                   </div>
                 </div>

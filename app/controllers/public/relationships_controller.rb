@@ -4,6 +4,7 @@ class Public::RelationshipsController < ApplicationController
 
   def create
     current_customer.follow(params[:customer_id])
+    # binding.pry
   end
 
   def destroy
