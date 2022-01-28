@@ -1,5 +1,5 @@
 class Public::ProductionsController < ApplicationController
-before_action :authenticate_customer!,except: [:index]
+  before_action :authenticate_customer!, except: [:index]
 
   def new
     @production = Production.new
@@ -17,11 +17,11 @@ before_action :authenticate_customer!,except: [:index]
 
   def index
     @production = Production.page(params[:page]).reverse_order
-    #いいね数の比較メソッド
-    @productions = Production.find(Good.group(:production_id)
-                             .order('count(production_id) desc')
-                             .limit(4)
-                             .pluck(:production_id))
+    # いいね数の比較メソッド
+    @productions = Production.find(Good.group(:production_id).
+                             order('count(production_id) desc').
+                             limit(4).
+                             pluck(:production_id))
   end
 
   def show
@@ -33,7 +33,7 @@ before_action :authenticate_customer!,except: [:index]
     @production = Production.find(params[:id])
   end
 
-  def update #複数画像の場合選択削除
+  def update # 複数画像の場合選択削除
     @production = Production.find(params[:id])
     if params[:production][:image_ids]
       params[:production][:image_ids].each do |image_id|
@@ -55,8 +55,8 @@ before_action :authenticate_customer!,except: [:index]
   end
 
   private
-  def production_params
-    params.require(:production).permit(:title, :introduction, images:[])
-  end
 
+  def production_params
+    params.require(:production).permit(:title, :introduction, images: [])
+  end
 end

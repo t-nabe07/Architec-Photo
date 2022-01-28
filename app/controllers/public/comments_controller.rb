@@ -17,6 +17,7 @@ class Public::CommentsController < ApplicationController
   end
 
   private
+
   def comment_params
     params.require(:comment).permit(:comment)
   end
@@ -24,6 +25,4 @@ class Public::CommentsController < ApplicationController
   def set_production
     @production = Production.find(params[:production_id])
   end
-
-
 end

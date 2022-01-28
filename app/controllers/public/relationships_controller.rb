@@ -22,8 +22,8 @@ class Public::RelationshipsController < ApplicationController
   end
 
   private
+
   def set_production
     @customer = Customer.find(params[:customer_id])
   end
-
 end

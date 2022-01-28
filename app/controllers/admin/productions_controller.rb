@@ -9,5 +9,4 @@ class Admin::ProductionsController < ApplicationController
     @customer = Customer.find(params[:id])
     @productions = Production.all
   end
-
 end

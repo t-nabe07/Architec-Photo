@@ -21,7 +21,8 @@ class Public::SessionsController < Devise::SessionsController
   # end
 
   protected
-  #論理削除。退会後のアカウントでのログイン制限。
+
+  # 論理削除。退会後のアカウントでのログイン制限。
   def reject_customer
     @customer = Customer.find_by(email: params[:customer][:email])
     if @customer

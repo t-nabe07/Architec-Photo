@@ -15,8 +15,8 @@ class Public::GoodsController < ApplicationController
   end
 
   private
+
   def set_production
     @production = Production.find(params[:production_id])
   end
-
 end

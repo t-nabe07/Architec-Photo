@@ -1,10 +1,10 @@
 class Public::CustomersController < ApplicationController
   before_action :authenticate_customer!
-  #URLで直接他人のプロフィール編集不可
-  before_action :ensure_current_customer, {only: [:edit, :update]}
+  # URLで直接他人のプロフィール編集不可
+  before_action :ensure_current_customer, { only: [:edit, :update] }
   def ensure_current_customer
     if current_customer.id != params[:id].to_i
-      flash[:notice]="権限がありません"
+      flash[:notice] = "権限がありません"
       redirect_to("/")
     end
   end
@@ -46,5 +46,4 @@ class Public::CustomersController < ApplicationController
     params.require(:customer).permit(:last_name, :first_name, :last_name_kana, :first_name_kana,
                                      :introduction, :college_name, :specialty_study, :plofile_image)
   end
-
 end
