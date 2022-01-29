@@ -10,8 +10,6 @@ class Production < ApplicationRecord
   validates :introduction, presence: true
   validates :images, presence: true
 
-
-
   # フルネーム(nilの場合を除く）
   def full_name
     last_name + " " + first_name

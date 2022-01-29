@@ -16,7 +16,7 @@
         <label>フォロー数: <%= customer.followings.count %></label>
         <label>フォロワー数: <%= customer.followers.count %></label>
         <br>
-        <div class='follow-btn' id="follow">
+        <div class='follow-btn' id="follow_<%= customer.id %>">
           <%= render "public/relationships/follow", customer: customer %>
         </div>
       </div>

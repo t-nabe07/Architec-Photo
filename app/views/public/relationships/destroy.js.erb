@@ -1,5 +1,5 @@
 
-  document.getElementById('follow').innerHTML = '<%= j(render partial: 'public/relationships/follow', locals: { customer: @customer }) %>'
+  document.getElementById('follow_<%= @customer.id %>').innerHTML = '<%= j(render partial: 'public/relationships/follow', locals: { customer: @customer }) %>'
 
 
 <!--$("#follow").html("<%#= j(render partial: 'public/relationships/follow', locals: { customer: @customer })) %>");-->
