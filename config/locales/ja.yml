@@ -7,3 +7,8 @@ ja:
         title: タイトル
         introduction: 作品説明
         images: 画像
+
+  errors:
+    messages:
+      too_many_files: は%{count}枚以内で選んでください
+      too_few_files: は%{count}枚以上で選んでください

@@ -8,7 +8,9 @@ class Production < ApplicationRecord
 
   validates :title, presence: true
   validates :introduction, presence: true
-  validates :images, presence: true
+  validates :images, presence: true, 
+                     file_size: { maximum: 2.megabytes },
+                     file_number: { maximum: 3 }
 
   # フルネーム(nilの場合を除く）
   def full_name

@@ -6,6 +6,8 @@ describe '投稿のテスト' do
 
   let!(:production) { create(:production, title:'hoge',introduction:'body') }
   let!(:customer) { create(:customer) }
+  before { sign_in customer }
+
   describe '詳細画面(production_path)のテスト' do
     before do
       visit production_path
