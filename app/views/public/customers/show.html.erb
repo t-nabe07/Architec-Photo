@@ -25,7 +25,9 @@
       <% else %>
         <br>
         <br>
-        <label class='follow-btn' id="follow"><%= render "public/relationships/follow", customer: @customer %></label>
+        <label class='follow-btn' id="follow_<%= @customer.id %>">
+          <%= render "public/relationships/follow", customer: @customer %>
+        </label>
       <% end %>
     </div>
   </div>
