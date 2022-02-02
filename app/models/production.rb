@@ -5,10 +5,12 @@ class Production < ApplicationRecord
   has_many :favorites, dependent: :destroy
   # Active Storage複数投稿用
   has_many_attached :images
+  # 通知機能
+  has_many :notifications, dependent: :destroy
 
   validates :title, presence: true
   validates :introduction, presence: true
-  validates :images, presence: true, 
+  validates :images, presence: true,
                      file_size: { maximum: 2.megabytes },
                      file_number: { maximum: 3 }
 
