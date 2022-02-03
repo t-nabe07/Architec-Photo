@@ -1,0 +1,15 @@
+<%# visitor = @notifications.visitor %>
+<%# visited = notification.visited %>
+
+<%#div class="customer-view clearfix">
+  <%#= link_to customer_path(visitor) do %>
+    <%#= attachment_image_yag visitor, :plofile_image, fill,100,100, format: "ipeg", fallback:"no_image.jpg", size: "50x50", class:"profile-img-circle" %>
+  <%# end %>
+  <%#= notification_form(@notifications) %><%#span class="moderate-font"><%= " (#{time_ago_in_words(notification.created_at)} 前)" %></span>
+  <br>
+  <%# if !@comment.nil? %>
+    <%#p class="moderate-font text-center" style="color: #c0c0c0;"><%= @comment %></p>
+  <%# end %>
+</div>
+
+<%#= visitor.first_name %>

@@ -26,6 +26,10 @@ Rails.application.routes.draw do
       resource :goods, only: [:create, :destroy]
       resource :favorites, only: [:create, :destroy]
     end
+
+    delete 'notifications/all_destroy' => 'notifications#all_destroy'
+    resources :notifications, only: :index
+
   end
 
   # 管理者用
