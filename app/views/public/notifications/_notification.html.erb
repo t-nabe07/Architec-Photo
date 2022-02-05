@@ -1,4 +1,4 @@
-<%# visitor = @notifications.visitor %>
+<%# visitor = notifications.visitor %>
 <%# visited = notification.visited %>
 
 <%#div class="customer-view clearfix">
@@ -13,3 +13,7 @@
 </div>
 
 <%#= visitor.first_name %>
+
+<% @notifications.each do |notification| %>
+  <%= notification.visitor.first_name %>
+<% end %>

@@ -10,7 +10,6 @@ class Public::CommentsController < ApplicationController
     @comment.save
     #通知メソッドを作成
     @production.create_notification_comment!(current_customer, @comment.id)
-    byebug
   end
 
   def destroy

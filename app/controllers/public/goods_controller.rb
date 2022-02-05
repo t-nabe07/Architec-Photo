@@ -7,7 +7,7 @@ class Public::GoodsController < ApplicationController
     good = @production.goods.new(customer_id: current_customer.id)
     good.save
     #通知レコードを作成
-    production.create_notification_good!(current_customer)
+    @production.create_notification_good!(current_customer)
   end
 
   def destroy
