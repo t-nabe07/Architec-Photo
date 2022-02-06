@@ -4,7 +4,7 @@
       <tr>
         <td>
           <% if comment.customer.plofile_image.representable? %>
-            <%= image_tag rails_representation_path comment.customer.plofile_image.variant( resize: '60x60'), class:"plofile_image" %>
+            <%= link_to image_tag rails_representation_path comment.customer.plofile_image.variant( resize: '60x60'), class:"plofile_image" %>
           <% else %>
             <%= link_to rails_blob_path(image, disposition: "attachment") do %>
               <%= image_tag "no_image.jpg", alt: "Download file" %>

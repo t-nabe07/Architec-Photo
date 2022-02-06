@@ -14,6 +14,17 @@
 
 <%#= visitor.first_name %>
 
-<% @notifications.each do |notification| %>
-  <%= notification.visitor.first_name %>
-<% end %>
+<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 mx-auto">
+  <table class="table table-border-bottom form-inline">
+    <tbody>
+      <% @notifications.each do |notification| %>
+        <tr>
+          <td>
+            <%#= link_to customer_path %>
+            <%= notification.visitor.full_name %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
