@@ -1,27 +1,36 @@
-<%# visitor = notifications.visitor %>
-<%# visited = notification.visited %>
-
-<%#div class="customer-view clearfix">
-  <%#= link_to customer_path(visitor) do %>
-    <%#= attachment_image_yag visitor, :plofile_image, fill,100,100, format: "ipeg", fallback:"no_image.jpg", size: "50x50", class:"profile-img-circle" %>
-  <%# end %>
-  <%#= notification_form(@notifications) %><%#span class="moderate-font"><%= " (#{time_ago_in_words(notification.created_at)} 前)" %></span>
-  <br>
-  <%# if !@comment.nil? %>
-    <%#p class="moderate-font text-center" style="color: #c0c0c0;"><%= @comment %></p>
-  <%# end %>
-</div>
-
-<%#= visitor.first_name %>
-
-<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 mx-auto">
+<div class="col-lg-10 col-md-10 col-sm-10 col-xs-10 mx-auto">
   <table class="table table-border-bottom form-inline">
     <tbody>
       <% @notifications.each do |notification| %>
         <tr>
           <td>
-            <%#= link_to customer_path %>
-            <%= notification.visitor.full_name %>
+            <%= link_to customer_path(notification.visitor), class: "text-dark", style: "font-weight: bold;" do %>
+              <%= notification.visitor.full_name %>
+            <% end %>
+            <%= "さんが" %>
+            
+            <% case notification.action %>
+              <% when 'follow' then %>
+                <%= "あなたをフォローしました" %>
+              <% when 'good' then %>
+                <%= link_to 'あなたの投稿', notification.production, style: "font-weight: bold;" %>
+                <%= "にいいねしました" %>
+              <% when 'comment' then %>
+                <% if notification.production.customer_id == notification.visited.id %>
+                  <%= link_to "あなたの投稿", notification.production, class: "text-dark", style: "font-weight: bold;" %>
+                <% else %>
+                  <%= link_to customer_path(notification.visited.id), class: "text-dark" do %>
+                    <%= notification.production.customer.full_name + "さんの" %>
+                  <% end %>
+                <%= link_to "投稿", notification.production, class: "text-dark", style: "font-weight: bold;" %>
+              <% end %>
+              <span>
+                <%= "にコメントしました" %>
+                <p class="text-secondary">
+                  <%= Comment.find_by(id: notification.comment_id).comment %>
+                </p>
+              </span>
+            <% end %>
           </td>
         </tr>
       <% end %>

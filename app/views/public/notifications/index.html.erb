@@ -1,12 +1,22 @@
-<h5>通知</h5>
-  <%= link_to notifications_all_destroy_path, method: :delete do %>
-    <i class="fas fa-trash" style="color: black;"></i>
-    <h7 style="color: black;">全削除</h7>
-  <% end %>
-<% if @notifications.exists? %>
-  <div class="customers-index">
-    <%= render "public/notifications/notification" %>
-  </div>
-<% else %>
-  <p>通知はありません</p>
-<% end %>
+<div class="col-lg-10 col-md-10 col-sm-10 col-xs-10 mx-auto">
+  <table class="table table-border-bottom">
+    <tbody>
+      <tr>
+        <td>
+          <h5 class="my-4">通知</h5>
+            <%= link_to notifications_all_destroy_path, method: :delete do %>
+              <i class="fas fa-trash" style="color: black;"></i>
+              <h7 style="color: black;">全削除</h7>
+            <% end %>
+          <% if @notifications.exists? %>
+            <div class="customers-index">
+              <%= render "public/notifications/notification" %>
+            </div>
+          <% else %>
+            <p>通知はありません</p>
+          <% end %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

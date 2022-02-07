@@ -13,18 +13,18 @@ Rails.application.routes.draw do
     patch 'customers/withdraw' => 'customers#withdraw', as: 'withdraw'
     put 'customers/withdraw' => 'customers#withdraw'
 
+    resources :productions do
+      resources :comments, only: [:create, :destroy]
+      resource :goods, only: [:create, :destroy]
+      resource :favorites, only: [:create, :destroy]
+    end
+
     resources :customers, only: [:show, :edit, :update] do
       get :favorites, on: :collection
       resource :relationships, only: [:create, :destroy]
       get 'followings' => 'relationships#followings', as: 'followings'
       get 'followers' => 'relationships#followers', as: 'followers'
       get :favorites, on: :collection
-    end
-
-    resources :productions do
-      resources :comments, only: [:create, :destroy]
-      resource :goods, only: [:create, :destroy]
-      resource :favorites, only: [:create, :destroy]
     end
 
     delete 'notifications/all_destroy' => 'notifications#all_destroy'
