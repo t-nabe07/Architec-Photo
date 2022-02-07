@@ -5,15 +5,19 @@
         <td>
           <% if comment.customer.plofile_image.representable? %>
             <%= link_to customer_path(comment.customer.id) do %>
-              <%= link_to image_tag rails_representation_path comment.customer.plofile_image.variant( resize: '60x60'), class:"plofile_image" %>
+              <%= image_tag rails_representation_path comment.customer.plofile_image.variant( resize: '60x60'), class:"plofile_image" %>
             <% end %>
           <% else %>
             <%= link_to rails_blob_path(image, disposition: "attachment") do %>
-              <%= image_tag "no_image.jpg", alt: "Download file" %>
+              <%= image_tag "no_image.jpg" %>
             <% end %>
           <% end %>
         </td>
-        <td><%= comment.customer.full_name %></td>
+        <td>
+          <%= link_to customer_path(comment.customer.id), class: "text-dark", style: "font-weight: bold;" do %>
+            <%= comment.customer.full_name %>
+          <% end %>
+        </td>
         <td><%= comment.created_at.strftime('%Y/%m/%d') %><%= comment.comment %></td>
         <td>
           <% if comment.customer == current_customer %>

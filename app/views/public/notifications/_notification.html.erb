@@ -4,11 +4,19 @@
       <% @notifications.each do |notification| %>
         <tr>
           <td>
+            <% if notification.visitor.plofile_image.representable? %>
+              <%= image_tag rails_representation_path notification.visitor.plofile_image.variant( resize: '40x40'), class:"plofile_image" %>
+            <% else %>
+              <%= link_to rails_blob_path(image, disposition: "attachment") do %>
+                <%= image_tag "no_image.jpg" %>
+              <% end %>
+            <% end %>
+
             <%= link_to customer_path(notification.visitor), class: "text-dark", style: "font-weight: bold;" do %>
               <%= notification.visitor.full_name %>
             <% end %>
             <%= "さんが" %>
-            
+
             <% case notification.action %>
               <% when 'follow' then %>
                 <%= "あなたをフォローしました" %>
