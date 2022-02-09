@@ -1,25 +1,40 @@
-<h2>Change your password</h2>
+<div class="container"></div>
+  <%= form_with model: @customer, url: customer_password_path, method: :patch, class: 'registration-main', local: true do |f| %>
+    <div class="row">
+      <div class="col-sm-12 col-md-12 col-lg-12">
+        <h4 class="subtitle mx-3 my-4">パスワード再設定</h4>
+        <%= render 'public/shared/error_messages', model: f.object %>
 
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
-  <%= render "public/shared/error_messages", resource: resource %>
-  <%= f.hidden_field :reset_password_token %>
 
-  <div class="field">
-    <%= f.label :password, "New password" %><br />
-    <% if @minimum_password_length %>
-      <em>(<%= @minimum_password_length %> characters minimum)</em><br />
-    <% end %>
-    <%= f.password_field :password, autofocus: true, autocomplete: "new-password" %>
-  </div>
+        <div class="row">
+          <div class='col-md-7 mb-6'>
+            <label class="form-text">新しいパスワード</label>
+            <span class="indispensable">必須</span>
+          </div>
+          <%= f.password_field :password, class:"input-default", id:"password", placeholder:"6文字以上" %>
 
-  <div class="field">
-    <%= f.label :password_confirmation, "Confirm new password" %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
+          <div class='col-md-7 mb-6'>
+            <br>
+            <br>
+            <label class="form-text">パスワード(確認)</label>
+            <span class="indispensable">必須</span>
+          </div>
+          <%= f.password_field :password_confirmation, class:"input-default", id:"password-confirmation", placeholder:"同じパスワードを入力して下さい" %>
 
-  <div class="actions">
-    <%= f.submit "Change my password" %>
-  </div>
-<% end %>
+          <%# 隠しフィールドでトークンもパラメーターで送る。こうすることでDBに保存されているリセットトークンとここから送られたトークンが一致するか確認している。 %>
+          <%= f.hidden_field :reset_password_token %>
 
-<%= render "public/shared/links" %>
+          <div class="col-md-7 mb-6">
+            <h5>よろしければ以下のボタンを押してください</h5>
+          </div>
+
+          <div class='register-btn'>
+            <br>
+            <%= f.submit "パスワードを変更する" ,class: "btn btn-border" %>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
