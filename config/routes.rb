@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     get 'customers/unsubscribe' => 'customers#unsubscribe', as: 'unsubscribe'
     patch 'customers/withdraw' => 'customers#withdraw', as: 'withdraw'
     put 'customers/withdraw' => 'customers#withdraw'
+    get 'search' => 'searches#search'
 
     resources :productions do
       resources :comments, only: [:create, :destroy]

@@ -1,0 +1,46 @@
+<div class="container">
+  <div class="row">
+  <h3 class="my-3 px-4"> 検索結果 "<%= params[:word] %>"</h3>
+
+    <table class="table table-hover table-inverse mx-5">
+      <% if @range == "ユーザー名" && params[:word].presence %>
+        <tbody>
+          <% @customers.each do |customer| %>
+            <tr>
+              <td>画像</td>
+              <td><%= link_to customer.full_name, customer_path(customer.id) %></td>
+              <td><%= customer.college_name %></td>
+              <td>投稿<%= customer.productions.count %>件</td>
+              <td>フォロー<%= customer.followings.count %></td>
+              <td>フォロワー<%= customer.followers.count %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      <% elsif @range == "作品名" && params[:word].presence %>
+        <tbody>
+          <% @productions.each do |production| %>
+            <tr>
+              <td>画像</td>
+              <td><%= production.title %></td>
+              <td><%= production.introduction %></td>
+              <td><%= production.customer.full_name %></td>
+              <td>いいね<%= production.goods.count %>件</td>
+              <td>コメント<%= production.comments.count %>件</td>
+            </tr>
+          <% end %>
+        </tbody>
+      <% else %>
+        <tbody>
+          <tr>
+            <td>
+              検索結果に当てはまるものはありません。<br>
+              再度条件を変えてお試しください。<br>
+              ※ユーザー名は姓,半角全角に注意してください。
+            </td>
+          </tr>
+        </tbody>
+      <% end %>
+
+    </table>
+  </div>
+</div>

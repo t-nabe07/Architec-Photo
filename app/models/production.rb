@@ -72,4 +72,19 @@ class Production < ApplicationRecord
     notification.save if notification.valid?
   end
 
+  #検索機能の条件分岐
+  def self.looks(search, word)
+    if search == "perfect_match"
+      @production = Production.where("title LIKE?", "#{word}")
+    elsif search == "forward_match"
+      @production = Production.where("title LIKE?", "#{word}%")
+    elsif search == "backward_match"
+      @production = Production.where("title LIKE?", "%#{word}")
+    elsif search == "partial_match"
+      @production = Production.where("title LIKE?", "%#{word}%")
+    else
+      @production = Production.all
+    end
+  end
+
 end

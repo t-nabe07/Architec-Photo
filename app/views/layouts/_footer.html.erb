@@ -6,6 +6,7 @@
       </button>
       <% if customer_signed_in? %>
         <li class="login-message">こんにちは,<%= current_customer.full_name %>さん</li>
+
       <% elsif admin_signed_in? %>
         <li class="login-message">こんにちは,管理者さん</li>
       <% else %>
@@ -23,8 +24,17 @@
           <% if unchecked_notifications.any? %>
             <i class="fas fa-circle" style="color: gold;"></i>
           <% end %>
+          <li class="nav-item"><%= link_to "🔔", notifications_path, class: "nav-link btn-default" %></li>
           <li class="nav-item">
-            <%= link_to "🔔", notifications_path, class: "nav-link btn-default" %>
+            <%= form_with url: search_path, local: true, method: :get do |f| %>
+              <%= f.text_field :word %>
+              <%= f.select :range, options_for_select([['ユーザー名'],['作品名']]) %>
+              <%= f.select :search, options_for_select([["完全一致","perfect_match"],
+                                                        ["前方一致","forward_match"],
+                                                        ["後方一致","backword_match"],
+                                                        ["部分一致","partial_match"]]) %>
+              <%= f.submit "search", class: "btn btn-border" %>
+            <% end %>
           </li>
         <% elsif admin_signed_in? %>
           <li class="nav-item"><%= link_to "logout", destroy_admin_session_path, method: :delete, class: 'nav-link text-white' %></li>

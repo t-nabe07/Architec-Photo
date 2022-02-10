@@ -7,6 +7,13 @@ ja:
         title: タイトル
         introduction: 作品説明
         images: 画像
+        partial_match: 部分一致
+
+    model:
+      search:
+    attributes:
+      search:
+        partial_match: 部分一致
 
   errors:
     messages:
