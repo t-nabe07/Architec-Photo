@@ -9,12 +9,6 @@ ja:
         images: 画像
         partial_match: 部分一致
 
-    model:
-      search:
-    attributes:
-      search:
-        partial_match: 部分一致
-
   errors:
     messages:
       too_many_files: は%{count}枚以内で選んでください

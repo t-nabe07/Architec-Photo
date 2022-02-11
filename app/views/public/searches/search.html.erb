@@ -7,7 +7,13 @@
         <tbody>
           <% @customers.each do |customer| %>
             <tr>
-              <td>画像</td>
+              <td>
+                <% if customer.plofile_image.attached? %>
+                  <%= image_tag customer.plofile_image.variant(combine_options:{gravity: :center, resize:"50x50^", crop:"50x50+0+0"}).processed, class:"plofile_image" %>
+                <% else %>
+                  <%= image_tag "no_image.jpg", size: '50x50' %>
+                <% end %>
+              </td>
               <td><%= link_to customer.full_name, customer_path(customer.id) %></td>
               <td><%= customer.college_name %></td>
               <td>投稿<%= customer.productions.count %>件</td>
@@ -17,18 +23,54 @@
           <% end %>
         </tbody>
       <% elsif @range == "作品名" && params[:word].presence %>
-        <tbody>
-          <% @productions.each do |production| %>
-            <tr>
-              <td>画像</td>
-              <td><%= production.title %></td>
-              <td><%= production.introduction %></td>
-              <td><%= production.customer.full_name %></td>
-              <td>いいね<%= production.goods.count %>件</td>
-              <td>コメント<%= production.comments.count %>件</td>
-            </tr>
-          <% end %>
-        </tbody>
+
+          <div class="col-lg-12 mx-auto">
+            <div class="card-group">
+              <% @productions.each do |production| %>
+                <div class="col-lg-3 col-md-4 col-ms-6">
+                  <div class="production-box col-lg-12">
+                    <% if !production.images.empty? %>
+                      <% if production.images[0].representable? %>
+                        <div class="swiper mySwiper">
+                          <div class="swiper-wrapper">
+                            <% production.images.each do |image| %>
+                              <div class="swiper-slide">
+                                <% if image.representable? %>
+                                  <%= link_to production_path(production) do %>
+                                    <%= image_tag rails_representation_path image.variant(combine_options:{gravity: :center, resize:"250x250^", crop:"250x250+0+0"}).processed,class: 'production-image' %>
+                                  <% end %>
+                                <% else %>
+                                  <%= link_to rails_blob_path(production.images[0], disponsition: "attachment") do %>
+                                    <%= image_tag "no_pdf.jpg", size:'200x150', alt: "Download file" %>
+                                  <% end %>
+                                <% end %>
+                              </div>
+                            <% end %>
+                          </div>
+                          <div class="swiper-pagination"></div>
+                        </div>
+                      <% end %>
+                    <% end %>
+
+                    <div class="card-body">
+                      <div class="card-title">
+                        <%= link_to production.title, production_path(production.id) %>
+                      </div>
+                      <div class="card-text">
+                        <%= production.introduction %>
+                      </div>
+                      <div class="comments-count" id="production_<%= production.id %>">
+                        <span>✏️<%= "#{production.comments.count}" %></span>
+                        <span>❤️<%= production.goods.count %></span>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              <% end %>
+            </div>
+          </div>
+
       <% else %>
         <tbody>
           <tr>
@@ -44,3 +86,6 @@
     </table>
   </div>
 </div>
+<br>
+<br>
+<br>
