@@ -84,3 +84,4 @@ group :production do
   gem 'mysql2'
 end
 gem 'rubocop-airbnb'
+gem 'impressionist', '~>1.6.1'

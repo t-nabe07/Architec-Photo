@@ -87,4 +87,7 @@ class Production < ApplicationRecord
     end
   end
 
+  #閲覧数について impressionistを使用できるように
+  is_impressionable counter_cache: true
+
 end

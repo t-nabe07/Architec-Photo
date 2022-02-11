@@ -44,17 +44,18 @@
 
             <div class="col-md-10">
               <label>
-                <div class='good-btn' id="good_<%= @production.id %>">
+                <div class='good-btn mx-2' id="good_<%= @production.id %>">
                   <%= render "public/goods/good", production: @production %>
                 </div>
               </label>
               <% if @production.customer.id != current_customer.id %>
                 <label>
-                  <div class='star-btn' id="favorite_<%= @production.id %>">
+                  <div class='star-btn mx-2' id="favorite_<%= @production.id %>">
                     <%= render "public/favorites/favo", production: @production %>
                   </div>
                 </label>
               <% end %>
+              <span class="mx-2">👀<%= @production.impressions_count %></span>
               <label>
                 <div class="comments-count col-md-12" id="production_<%= @production.id %>">
                   <p>コメント件数:<%= @production.comments.count %></p>

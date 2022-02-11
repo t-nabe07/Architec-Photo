@@ -34,8 +34,9 @@
                 <p><%= production.introduction %></p>
               </div>
               <div class="comments-count" id="production_<%= production.id %>">
-                <span>✏️<%= "#{production.comments.count}" %></span>
-                <span>❤️<%= production.goods.count %></span>
+                <span class="mx-1">✏️<%= "#{production.comments.count}" %></span>
+                <span class="mx-1">❤️<%= production.goods.count %></span>
+                <span class="mx-1">👀<%= production.impressions_count %></span>
               </div>
             </div>
           </div>
@@ -77,8 +78,9 @@
                   <%= production.introduction %>
                 </div>
                 <div class="comments-count" id="production_<%= production.id %>">
-                  <span>✏️<%= "#{production.comments.count}" %></span>
-                  <span>❤️<%= production.goods.count %></span>
+                  <span class="mx-1">✏️<%= "#{production.comments.count}" %></span>
+                  <span class="mx-1">❤️<%= production.goods.count %></span>
+                  <span class="mx-1">👀<%= production.impressions_count %></span>
                 </div>
               </div>
             </div>
