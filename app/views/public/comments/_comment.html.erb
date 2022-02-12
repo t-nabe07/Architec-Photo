@@ -5,7 +5,7 @@
         <td>
           <%= link_to customer_path(comment.customer.id) do %>
             <% if comment.customer.plofile_image.attached? %>
-              <%= image_tag comment.customer.plofile_image.variant( resize: '60x60'), class:"plofile_image" %>
+              <%= image_tag comment.customer.plofile_image.variant(combine_options:{gravity: :center, resize:"60x60^", crop:"60x60+0+0"}).processed, class:"plofile_image" %>
             <% else %>
               <%= image_tag "no_image.jpg", size: '60x60' %>
             <% end %>
