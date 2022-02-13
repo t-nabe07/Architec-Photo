@@ -4,11 +4,11 @@
       <% @notifications.each do |notification| %>
         <tr>
           <td>
-            <% if notification.visitor.plofile_image.representable? %>
-              <%= image_tag rails_representation_path notification.visitor.plofile_image.variant( resize: '40x40'), class:"plofile_image" %>
-            <% else %>
-              <%= link_to rails_blob_path(image, disposition: "attachment") do %>
-                <%= image_tag "no_image.jpg" %>
+            <%= link_to customer_path(notification.visitor.id) do %>
+              <% if notification.visitor.plofile_image.attached? %>
+                <%= image_tag notification.visitor.plofile_image.variant(combine_options:{gravity: :center, resize:"40x40^", crop:"40x40+0+0"}).processed, class:"plofile_image" %>
+              <% else %>
+                <%= image_tag "no_image.jpg", size: '40x40' %>
               <% end %>
             <% end %>
 
