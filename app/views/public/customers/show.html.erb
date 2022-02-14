@@ -21,7 +21,7 @@
         <td>紹介文がありません。</td>
       <% end %>
       <% if @customer.id == current_customer.id %>
-        <button><i class="fa fa-cog"><%= link_to "編集", edit_customer_path(@customer) %></i></button>
+        <div><%= link_to "⚙編集", edit_customer_path(@customer), class: "btn btn-border" %></div>
       <% else %>
         <br>
         <br>
