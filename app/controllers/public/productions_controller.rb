@@ -27,7 +27,7 @@ class Public::ProductionsController < ApplicationController
   def show
     @production = Production.find(params[:id])
     @comment = Comment.new
-    #shoeアクセスでPV数１つ増える。 ip_address管理。
+    #showアクセスでPV数１つ増える。 ip_address管理。
     impressionist(@production, nil, unique: [:ip_address])
   end
 
