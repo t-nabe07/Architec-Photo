@@ -85,3 +85,4 @@ group :production do
 end
 gem 'rubocop-airbnb'
 gem 'impressionist', '~>1.6.1'
+gem 'omniauth-google-oauth2'
