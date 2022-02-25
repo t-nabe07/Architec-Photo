@@ -31,7 +31,6 @@
           <li class="nav-item"><%= link_to "create", new_production_path, class: 'nav-link text-white' %></li>
           <li class="nav-item"><%= link_to "mypage", customer_path(current_customer.id), class: 'nav-link text-white' %></li>
           <li class="nav-item"><%= link_to "products", productions_path, class: 'nav-link text-white' %></li>
-          <li class="nav-item"><%= link_to "admin", new_admin_session_path, class: 'nav-link text-white' %></li>
           <% if unchecked_notifications.any? %>
             <i class="fas fa-circle" style="color: gold;"></i>
           <% end %>
@@ -45,7 +44,6 @@
           <li class="nav-item"><%= link_to "login", new_customer_session_path, class: 'nav-link text-white' %></li>
           <li class="nav-item"><%= link_to "new", new_customer_registration_path, class: 'nav-link text-white' %></li>
           <li class="nav-item"><%= link_to "products", productions_path, class: 'nav-link text-white' %></li>
-          <li class="nav-item"><%= link_to "admin", new_admin_session_path, class: 'nav-link text-white' %>
         <% end %>
       </div>
     </div>
